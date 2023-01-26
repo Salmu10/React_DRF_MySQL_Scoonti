@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function StationsCard ({ station }) {
-    console.log(station);
+    // console.log(station);
     return (
         
         <div className="card w-96 bg-base-100">

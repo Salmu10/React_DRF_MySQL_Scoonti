@@ -2,8 +2,10 @@ import './SpinnerLoading.scss';
 
 export default function SpinnerLoading() {
     return (
-        <div>
-            <p>Loading...</p>
+        <div className="spinner">
+            <div className="ring">Loading
+                <span></span>
+            </div>
         </div>
     )
 }

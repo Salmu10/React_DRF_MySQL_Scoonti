@@ -1,0 +1,65 @@
+.station_add_container {
+    min-height: 77vh;
+    .title {
+        text-align: left;
+        padding: 20px;
+        h2 {
+            margin-left: 5%;
+            margin-top: 3%;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #333;
+        }
+    }
+    .error {
+        color: red;
+        font-style: italic;
+    }
+    .add_form {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        width: 50%;
+        padding: 20px;
+        margin-left: 5%;
+        div{
+            display: block;
+            width: 60%;
+            text-align: left;
+            padding: 15px;
+            .etiqueta {
+                display: block;
+                float: left;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            input {
+                display: block;
+                margin-left: 20px;
+                float: right;
+            }
+            select {
+                display: block;
+                margin-left: 20px;
+                width: 190px;
+                float: right;
+            }
+            span {
+                padding-top: 10px;
+            }
+        }
+        .buttons_box {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 20px;
+            button {
+                text-transform: uppercase;
+                font-weight: bold;
+                margin-right: 20px;
+                margin-left: 20px;
+            }
+        }
+    }
+}

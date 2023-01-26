@@ -1,17 +1,29 @@
 import React from "react";
 import './Header.scss';
+import { useNavigate } from "react-router-dom";
 
 export default function Header () {
+    const navigate = useNavigate();
+
+    const redirects = {
+        home: () => navigate('/home'),
+        rent: () => navigate('/rent'),
+        dashboard: () => navigate('/dashboard'),
+    }
+
     return (
         <header>
-            <div class="header-container">
-                <div class="logo">
-                    <img src="../../assets/Logo_Salmu.png" alt="logo"/>
+            <div className="header-container">
+                <div className="logo">
+                    <img src="/assets/Logo.png" alt="logo"/>
                 </div>
                 <nav>
-                    <div class="nav_buttons">
-                        <a class="link" src="#">Home</a>
-                        <a class="link" src="#">Rent</a>
+                    <div className="nav_buttons">
+                        <a className="link" onClick={() => redirects.home()}>Home</a>
+                        <a className="link" onClick={() => redirects.rent()}>Rent</a>
+                        <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a>
+                        {/* <a className="link" src="#">Home</a> */}
+                        {/* <a className="link" src="#">Rent</a> */}
                     </div>
                 </nav>
             </div>

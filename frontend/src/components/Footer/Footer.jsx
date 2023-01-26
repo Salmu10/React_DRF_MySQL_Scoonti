@@ -4,15 +4,15 @@ import './Footer.scss';
 export default function Footer() {
     return (
         <footer>
-            <div class="footer">
-                <div class="page_logo_box">
-                    {/* <img src="../assets/logo.png" alt="logo"/> */}
+            <div className="footer">
+                <div className="page_logo_box">
+                <img src="/assets/Logo.png" alt="logo"/>
                 </div>
-                <div class="text_box">
-                    <p>Restaurant project by Salva Muñoz</p>
+                <div className="text_box">
+                    <p>Scoonti project by Salva Muñoz</p>
                 </div>
-                <div class="logo_box">
-                    <img src="../../assets/Logo_Salmu.png" alt="logo"/>
+                <div className="logo_box">
+                    <img src="/assets/Logo_Salmu.png" alt="logo"/>
                 </div>        
             </div>
         </footer>
