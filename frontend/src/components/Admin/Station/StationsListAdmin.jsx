@@ -32,7 +32,7 @@ export default function StationsListAdmin ({ stations, deleteStation }) {
                 <tbody className="tbody_stations_list">
                     {
                         stations.map(( station, index ) => (
-                            <StationsCardAdmin key={index} station={station}/>
+                            <StationsCardAdmin key={index} station={station} deleteStation={deleteStation}/>
                         ))
                     }
                 </tbody>

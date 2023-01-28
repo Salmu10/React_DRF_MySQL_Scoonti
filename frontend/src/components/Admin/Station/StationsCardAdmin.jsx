@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import './StationsCardAdmin.scss';
 
-export default function StationsCardAdmin ({ station, deleteStation }) {
+export default function StationsCardAdmin ({ station, index, deleteStation }) {
+
     const navigate = useNavigate();
 
     const redirects = {
         update: (slug) => navigate('/dashboard/stations/update/' + slug),
     }
-
-    // const deleteStation = () => {
-    //     useDeleteStationMultiple(selectedRows.map(row => row.slug));
-    //     setToggleCleared(!toggleCleared);
-    //     setSelectedRows([]);
-    // }
 
     return (
         <tr>
