@@ -43,7 +43,8 @@ const ScootersForm = ({scooter= {slug: '', name: '', status: ''}, form_type, sen
             </div>
             <div className='status_box'>
                 <label htmlFor='status' className='etiqueta'>Status:</label>
-                <select id='status' name="status" {...register('status')} defaultValue="in_use">
+                <select id='status' name="status" {...register('status')} defaultValue="">
+                    <option value="" disabled>Select</option>
                     <option value="in_use">In use</option>
                     <option value="unused">Unused</option>
                     <option value="maintenance">Maintenance</option>

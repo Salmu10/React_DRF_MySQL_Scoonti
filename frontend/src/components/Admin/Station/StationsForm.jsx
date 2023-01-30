@@ -49,7 +49,8 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
             </div>
             <div className='status_box'>
                 <label htmlFor='status' className='etiqueta'>Status:</label>
-                <select id='status' name="status" {...register('status')} defaultValue="Active">
+                <select id='status' name="status" {...register('status')} defaultValue="">
+                    <option value="" disabled>Select</option>
                     <option value="active">Active</option>
                     <option value="disabled">Disabled</option>
                 </select><br/>
