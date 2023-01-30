@@ -1,17 +1,25 @@
-import React from "react";
-import('./StationsAdd.scss');
+import React, { useEffect } from "react";
 import StationsForm from "../../../components/Admin/Station/StationsForm";
-// import { useStations } from "../../../hooks/useStations";
+import { useStations } from "../../../hooks/useStations";
+import { useNavigate } from "react-router-dom";
 
 const StationsAdd = () => {
-    // const { useAddStation } = useStations();
+    const { isCorrect, useAddStation } = useStations();
+    const form_type = 'create';
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isCorrect) {
+            navigate('/dashboard/stations');
+        }
+    }, [isCorrect, navigate]);
+
     return (
         <div className="station_add_container">
             <div className="title">
                 <h2>Create Station</h2>
             </div>
-            <StationsForm/>
-            {/* <StationsForm SendData={(data) => useAddStation(data)} station={oneStation}/> */}
+            <StationsForm form_type={form_type} sendData={(data) => useAddStation(data)}/>
         </div>
     )
 }

@@ -26,6 +26,8 @@ export default function StationsListAdmin ({ stations, deleteStation }) {
                         <th>Status</th>
                         <th>Latitude</th>
                         <th>Longitude</th>
+                        <th>Slots</th>
+                        <th>Scooters</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

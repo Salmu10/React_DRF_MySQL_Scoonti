@@ -1,22 +1,43 @@
 import {useContext, useCallback, useEffect, useState} from 'react';
-import { useNavigate } from "react-router-dom";
 import ScooterService from '../services/ScooterService';
 import ScooterContext from "../context/ScootersContext";
 import { toast } from "react-toastify";
 
 export function useScooters() {
-    const navigate = useNavigate();
     const {scooters, setScooters} = useContext(ScooterContext);
     const [oneScooter, setOneScooter] = useState({});
+    const [isCorrect, setIsCorrect] = useState(false);
 
-    const getOneScooter = useCallback((slug) => {
-        console.log(slug);
+    const useOneScooter = useCallback((slug) => {
         ScooterService.getOneScooter(slug)
-            .then(({ data }) => {
-                    console.log(data);
-                    setOneScooter(data);
+            .then(({data}) => {
+                setOneScooter(data);
             })
             .catch(e => console.error(e));
+    }, [oneScooter]);
+
+    const useAddScooter = useCallback(data => {
+        console.log(data);
+        // ScooterService.createScooter(data)
+        // .then(({ data, status }) => {
+        //     if (status === 200) {
+        //         toast.success('Scooter created successfully');
+        //         setScooters([...scooters, data]);
+        //         setIsCorrect(true);
+        //         setTimeout(() => { setIsCorrect(false); }, 1000);
+        //     }
+        // })
+        // .catch(e => {
+        //     console.error(e);
+        //     toast.error('Create scooter error');
+        // });
+    }, []);
+
+    const useUpdateScooter = useCallback((slug, data) => {
+        console.log(slug);
+        console.log(data);
+        setIsCorrect(true);
+        setTimeout(() => { setIsCorrect(false); }, 1000);
     }, []);
 
     const useDeleteScooter = (slug) => {
@@ -31,4 +52,4 @@ export function useScooters() {
         // .catch(e => console.error(e));
     }
 
-    return { scooters, setScooters, getOneScooter, oneScooter, setOneScooter, useDeleteScooter }}
+    return { isCorrect, scooters, setScooters, useOneScooter, oneScooter, setOneScooter, useAddScooter, useUpdateScooter, useDeleteScooter }}

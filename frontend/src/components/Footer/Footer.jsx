@@ -12,7 +12,7 @@ export default function Footer() {
                     <p>Scoonti project by Salva Muñoz</p>
                 </div>
                 <div className="logo_box">
-                    <img src="/assets/Logo_Salmu.png" alt="logo"/>
+                    <img src="/assets/logo_salmu_blanco.png" alt="logo"/>
                 </div>        
             </div>
         </footer>

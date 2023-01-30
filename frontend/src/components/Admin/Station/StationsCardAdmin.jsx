@@ -10,6 +10,8 @@ export default function StationsCardAdmin ({ station, index, deleteStation }) {
         update: (slug) => navigate('/dashboard/stations/update/' + slug),
     }
 
+    console.log(station);
+
     return (
         <tr>
             <td className="id_col">{station.id}</td>
@@ -19,6 +21,8 @@ export default function StationsCardAdmin ({ station, index, deleteStation }) {
             <td>{station.status}</td>
             <td>{station.latitude}</td>
             <td>{station.longitude}</td>
+            <td>{station.total_slots}</td>
+            <td>{station.total_scooters}</td>
             <td> 
                 <button className="buttons" onClick={() => redirects.update(station.slug)}>Edit</button>
                 <button className="buttons" onClick={() => deleteStation(station.slug)}>Delete</button>

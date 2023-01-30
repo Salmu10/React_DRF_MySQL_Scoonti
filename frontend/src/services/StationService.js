@@ -17,6 +17,7 @@ const StationService = {
     deleteStation(slug) {
         return api().delete(`station/${slug}`);
     },
+    
 };
 
 export default StationService;
