@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-const StationsForm = ({station= {slug: '', name: '', status: '', image: '', latitude: '', longitude: ''}, form_type, sendData}) => {
+const StationsForm = ({station= {slug: '', name: '', status: '', image: '', latitude: '', longitude: '', slots: ''}, form_type, sendData}) => {
     const navigate = useNavigate();
 
     const validators = Yup.object().shape({
@@ -16,6 +16,7 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
         image: Yup.string().url().required('*Image is required').min(3).max(100),
         latitude: Yup.number().required('*Latitude is required').min(-180).max(180),
         longitude: Yup.number().required('*Longitude is required').min(-180).max(180),
+        slots: Yup.number().required('*Slots number must be between 5 and 20').min(5).max(20),
     });
 
     const {register, handleSubmit, setValue, formState: {errors} } = useForm({resolver: yupResolver(validators)});
@@ -27,6 +28,7 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
             setValue('image', station.image);
             setValue('latitude', station.latitude);
             setValue('longitude', station.longitude);
+            setValue('slots', station.total_slots);
         }
     }, [station]);
 
@@ -70,6 +72,11 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
                 <label htmlFor='longitude' className='etiqueta'>Longitude:</label>
                 <input id='longitude' name="longitude" type="text" {...register('longitude')}/><br/>
                 <span className="error">{errors.longitude?.message}</span>
+            </div>
+            <div className='slots_box'>
+                <label htmlFor='slots' className='etiqueta'>Slots:</label>
+                <input id='slots' name="slots" type="text" {...register('slots')}/><br/>
+                <span className="error">{errors.slots?.message}</span>
             </div>
             <div className='buttons_box'>
                 <button type="submit" className="btn btn-primary">{button_type}</button>

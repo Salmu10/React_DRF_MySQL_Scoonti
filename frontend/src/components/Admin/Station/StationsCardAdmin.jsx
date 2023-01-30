@@ -10,8 +10,6 @@ export default function StationsCardAdmin ({ station, index, deleteStation }) {
         update: (slug) => navigate('/dashboard/stations/update/' + slug),
     }
 
-    console.log(station);
-
     return (
         <tr>
             <td className="id_col">{station.id}</td>

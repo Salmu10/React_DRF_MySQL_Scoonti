@@ -17,19 +17,27 @@ export function useStations() {
     }, [oneStation]);
 
     const useAddStation = useCallback(data => {
-        StationService.createStation(data)
-        .then(({ data, status }) => {
-            if (status === 200) {
-                toast.success('Station created successfully');
-                setStations([...stations, data]);
-                setIsCorrect(true);
-                setTimeout(() => { setIsCorrect(false); }, 1000);
-            }
-        })
-        .catch(e => {
-            console.error(e);
-            toast.error('Create station error');
-        });
+        let station_data = {
+            name: data.name,
+            status: data.status,
+            image: data.image,
+            latitude: data.latitude,
+            longitude: data.longitude
+        }
+
+        StationService.createStation(station_data, data.slots)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    toast.success('Station created successfully');
+                    setStations([...stations, data]);
+                    setIsCorrect(true);
+                    setTimeout(() => { setIsCorrect(false); }, 1000);
+                }
+            })
+            .catch(e => {
+                console.error(e);
+                toast.error('Create station error');
+            });
     }, []);
 
     const useUpdateStation = useCallback((slug, data) => {

@@ -10,7 +10,7 @@ class StationSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         total_slots = len(Slot.objects.filter(station_id=instance.id))
-        total_scooters = len(Slot.objects.filter(station_id=instance.id, status='used'))
+        total_scooters = len(Slot.objects.filter(station_id=instance.id, status='in_use'))
         return {
             "id": instance.id,
             "slug": instance.slug,
@@ -58,7 +58,7 @@ class SlotSerializer(serializers.ModelSerializer):
         if station is None:
             raise serializers.ValidationError('Station is not find')
 
-        slot = Slot.objects.create(station_id=station_id, scooter_id=None, status="unused")
+        slot = Slot.objects.create(station_id=station_id, scooter_id=None, status="vacant")
         slot.save()
         return slot
 
@@ -80,11 +80,11 @@ class SlotSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('Scooter is not find')
                 
             instance.scooter_id = scooter_id
-            instance.status = "used"
+            instance.status = "in_use"
 
         if scooter_id == 0:
             instance.scooter_id = None
-            instance.status = "unused"
+            instance.status = "vacant"
 
         instance.save()
         return instance
