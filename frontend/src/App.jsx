@@ -4,7 +4,8 @@ import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.scss';
 
-import { StationContext } from './context/StationsContext';
+import { StationContextProvider } from './context/StationsContext';
+import { ScooterContextProvider } from './context/ScootersContext';
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -23,23 +24,25 @@ function App() {
     <div className="App">
       <Suspense fallback={<SpinnerLoading/>}>
         <BrowserRouter>
-          <StationContext>
-            <Header/>
-            <ToastContainer 
-              position="top-right" autoClose={2500} hideProgressBar={false} newestOnTop
-              closeOnClick rtl={false} pauseOnFocusLoss={false} draggable pauseOnHover theme="dark"
-            />
-              <Routes>
-                <Route path="/" element={<Rent/>} />
-                <Route path="/home" element={<Home/>} />
-                <Route path="/rent" element={<Rent/>} />
-                <Route path="/dashboard" element={<Dashboard/>}/>
-                <Route path="/dashboard/stations" element={<StationsList/>}/>
-                <Route path="/dashboard/stations/add" element={<StationsAdd/>}/>
-                <Route path="/dashboard/stations/update/:slug" element={<StationsUpdate/>}/>
-              </Routes>
-            <Footer/>
-          </StationContext>
+          <StationContextProvider>
+            <ScooterContextProvider>
+              <Header/>
+              <ToastContainer 
+                position="top-right" autoClose={2500} hideProgressBar={false} newestOnTop
+                closeOnClick rtl={false} pauseOnFocusLoss={false} draggable pauseOnHover theme="dark"
+              />
+                <Routes>
+                  <Route path="/" element={<Rent/>} />
+                  <Route path="/home" element={<Home/>} />
+                  <Route path="/rent" element={<Rent/>} />
+                  <Route path="/dashboard" element={<Dashboard/>}/>
+                  <Route path="/dashboard/stations" element={<StationsList/>}/>
+                  <Route path="/dashboard/stations/add" element={<StationsAdd/>}/>
+                  <Route path="/dashboard/stations/update/:slug" element={<StationsUpdate/>}/>
+                </Routes>
+              <Footer/>
+            </ScooterContextProvider>
+          </StationContextProvider>
         </BrowserRouter>
       </Suspense>
     </div>

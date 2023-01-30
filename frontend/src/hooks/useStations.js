@@ -7,16 +7,16 @@ import { toast } from "react-toastify";
 export function useStations() {
     const navigate = useNavigate();
     const {stations, setStations} = useContext(StationContext);
-    const [oneBike, setOneBike] = useState({});
+    const [oneStation, setOneStation] = useState({});
 
     const getOneStation = useCallback((slug) => {
         StationService.getOneStation(slug)
             .then(({ data }) => {
                     console.log(data);
-                    setOneBike(data);
+                    setOneStation(data);
             })
             .catch(e => console.error(e));
-    }, []);
+    }, [setOneStation]);
 
     const useAddStation = useCallback(data => {
         StationService.createStation(data)
@@ -41,4 +41,4 @@ export function useStations() {
         .catch(e => console.error(e));
     }
 
-    return { stations, setStations, getOneStation, oneBike, setOneBike, useAddStation, useDeleteStation }}
+    return { stations, setStations, getOneStation, oneStation, setOneStation, useAddStation, useDeleteStation }}

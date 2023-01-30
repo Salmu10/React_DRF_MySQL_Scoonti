@@ -5,8 +5,10 @@ from django.utils.text import slugify
 from scoonti.app.core.utils import generate_random_string
 
 from .models import Station
+from .models import Scooter
 
 @receiver(pre_save, sender=Station)
+@receiver(pre_save, sender=Scooter)
 
 def add_slug_to_station_if_not_exists(sender, instance, *args, **kwargs):
     MAXIMUM_SLUG_LENGTH = 255

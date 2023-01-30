@@ -3,14 +3,13 @@ import StationService from '../services/StationService';
 
 const Context = React.createContext({})
 
-export function StationContext({ children }) {
+export function StationContextProvider({ children }) {
     const [stations, setStations] = useState([]);
 
     useEffect(function () {
-        console.log("context station")
         StationService.getAllStations()
-            .then((data) => {
-                setStations(data.data);
+            .then(({data}) => {
+                setStations(data);
             })
             .catch(e => console.error(e));
     }, [setStations]);

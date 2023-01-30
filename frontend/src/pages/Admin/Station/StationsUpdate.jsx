@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 const StationsUpdate = () => {
     const { slug } = useParams();
     // const { useUpdateStation, useOneStation, oneStation } = useStations();
-    const { oneBike, getOneStation,  } = useStations(slug);
+    const { oneStation, getOneStation,  } = useStations(slug);
 
     useEffect(() => {
         if (slug !== '') {
@@ -22,7 +22,7 @@ const StationsUpdate = () => {
                 <h2>Update Station</h2>
             </div>
             {/* <StationsForm SendData={(data) => useUpdateStation(slug, data)} station={oneStation}/> */}
-            <StationsForm station={oneBike}/>
+            <StationsForm station={oneStation}/>
         </div>
     )
 }

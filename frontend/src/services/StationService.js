@@ -10,8 +10,8 @@ const StationService = {
         return api().get(`station/${slug}`);
     },
 
-    createStation(data) {
-        return api().post("/station", data);
+    createStation(data, slots = 0) {
+        return api().post("/station", { 'station': data, 'slot': { 'num_slots': slots } });
     },
 
     deleteStation(slug) {
