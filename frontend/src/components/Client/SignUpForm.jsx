@@ -10,14 +10,14 @@ import * as Yup from 'yup';
 const SignUpForm = ({form_type, sendData}) => {
     const navigate = useNavigate();
 
-    const validators = Yup.object().shape({
-        reg_username: Yup.string().required('*Username is required').min(3, '*Username must be between 3 and 15 characters').max(15, '*Username must be between 3 and 15 characters'),
-        reg_email: Yup.string().email('*Email format invalid').required('*Email is required'),
-        reg_password: Yup.string().required('*Password is required').min(5, '*Password must have at least 5 characters'),
-        reg_password_2: Yup.string().oneOf([Yup.ref('reg_password'), null], '*Passwords must match'),
+    const validators_register = Yup.object().shape({
+        username: Yup.string().required('*Username is required').min(3, '*Username must be between 3 and 15 characters').max(15, '*Username must be between 3 and 15 characters'),
+        email: Yup.string().email('*Email format invalid').required('*Email is required'),
+        password: Yup.string().required('*Password is required').min(5, '*Password must have at least 5 characters'),
+        password_2: Yup.string().oneOf([Yup.ref('password'), null], '*Passwords must match'),
     });
 
-    const {register, handleSubmit, formState: {errors} } = useForm({resolver: yupResolver(validators)});
+    const {register, handleSubmit, formState: {errors} } = useForm({resolver: yupResolver(validators_register)});
 
     const send_data = data => {
         sendData(data);
@@ -51,20 +51,20 @@ const SignUpForm = ({form_type, sendData}) => {
                         <form className="forms_form" onSubmit={handleSubmit(send_data)}>
                             <fieldset className="forms_fieldset">
                                 <div className="forms_field">
-                                    <input type="text" placeholder="Username" className="forms_field-input" {...register('reg_username')}/>
-                                    <span className="error">{errors.reg_username?.message}</span>
+                                    <input type="text" placeholder="Username" className="forms_field-input" {...register('username')}/>
+                                    <span className="error">{errors.username?.message}</span>
                                 </div>
                                 <div className="forms_field">
-                                    <input type="email" placeholder="Email" className="forms_field-input" {...register('reg_email')}/>
-                                    <span className="error">{errors.reg_email?.message}</span>
+                                    <input type="email" placeholder="Email" className="forms_field-input" {...register('email')}/>
+                                    <span className="error">{errors.email?.message}</span>
                                 </div>
                                 <div className="forms_field">
-                                    <input type="password" placeholder="Password" className="forms_field-input" {...register('reg_password')}/>
-                                    <span className="error">{errors.reg_password?.message}</span>
+                                    <input type="password" placeholder="Password" className="forms_field-input" {...register('password')}/>
+                                    <span className="error">{errors.password?.message}</span>
                                 </div>
                                 <div className="forms_field">
-                                    <input type="password" placeholder="Repeat password" className="forms_field-input" {...register('reg_password_2')}/>
-                                    <span className="error">{errors.reg_password_2?.message}</span>
+                                    <input type="password" placeholder="Repeat password" className="forms_field-input" {...register('password_2')}/>
+                                    <span className="error">{errors.password_2?.message}</span>
                                 </div>
                             </fieldset>
                             <div className="forms_buttons">
