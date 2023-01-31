@@ -1,0 +1,14 @@
+.home_container {
+    min-height: 80vh;
+    padding: 20px;
+    .maps {
+        display: block;
+        width: 70%;
+        margin: auto;
+        border: 2px solid #008f88;
+        border-radius: 15px;
+        .mapboxgl-map {
+            border-radius: 15px;
+        }
+    }
+}

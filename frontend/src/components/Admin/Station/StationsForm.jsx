@@ -41,6 +41,7 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
     };
 
     const button_type = form_type == 'create' ? 'Create' : 'Update';
+    const read_only = form_type == 'update' ? true : false;
 
     return (
         <form className='add_form' onSubmit={handleSubmit(send_data)}>
@@ -75,7 +76,7 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
             </div>
             <div className='slots_box'>
                 <label htmlFor='slots' className='etiqueta'>Slots:</label>
-                <input id='slots' name="slots" type="text" {...register('slots')}/><br/>
+                <input id='slots' name="slots" type="text" {...register('slots')} disabled={read_only}/><br/>
                 <span className="error">{errors.slots?.message}</span>
             </div>
             <div className='buttons_box'>

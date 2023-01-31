@@ -9,12 +9,14 @@ export default function Header () {
         home: () => navigate('/home'),
         rent: () => navigate('/rent'),
         dashboard: () => navigate('/dashboard'),
+        login: () => navigate('/login'),
+        register: () => navigate('/register'),
     }
 
     return (
         <header>
             <div className="header-container">
-                <div className="logo">
+                <div className="logo" onClick={() => redirects.home()}>
                     <img src="/assets/Logo.png" alt="logo"/>
                 </div>
                 <nav>
@@ -22,6 +24,8 @@ export default function Header () {
                         <a className="link" onClick={() => redirects.home()}>Home</a>
                         <a className="link" onClick={() => redirects.rent()}>Rent</a>
                         <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a>
+                        <a className="link" onClick={() => redirects.login()}>Login</a>
+                        <a className="link" onClick={() => redirects.register()}>Register</a>
                         {/* <a className="link" src="#">Home</a> */}
                         {/* <a className="link" src="#">Rent</a> */}
                     </div>

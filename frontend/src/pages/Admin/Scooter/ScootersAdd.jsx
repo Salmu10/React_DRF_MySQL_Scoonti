@@ -10,7 +10,7 @@ const ScootersAdd = () => {
 
     useEffect(() => {
         if (isCorrect) {
-            navigate('/dashboard/scooter');
+            navigate('/dashboard/scooters');
         }
     }, [isCorrect, navigate]);
 

@@ -14,6 +14,8 @@ import SpinnerLoading from './components/SpinnerLoading/SpinnerLoading';
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Rent = React.lazy(() => import( "./pages/Rent/Rent"));
 const Dashboard = React.lazy(() => import( "./pages/Admin/Dashboard"));
+const Login = React.lazy(() => import( "./pages/Login/Login"));
+const Register = React.lazy(() => import( "./pages/Login/Register"));
 
 const StationsList = React.lazy(() => import('./pages/Admin/Station/StationsList'));
 const StationsAdd = React.lazy(() => import('./pages/Admin/Station/StationsAdd'));
@@ -40,6 +42,8 @@ function App() {
                   <Route path="/home" element={<Home/>} />
                   <Route path="/rent" element={<Rent/>} />
                   <Route path="/dashboard" element={<Dashboard/>}/>
+                  <Route path="/login" element={<Login/>}/>
+                  <Route path="/register" element={<Register/>}/>
                   
                   <Route path="/dashboard/stations" element={<StationsList/>}/>
                   <Route path="/dashboard/stations/add" element={<StationsAdd/>}/>

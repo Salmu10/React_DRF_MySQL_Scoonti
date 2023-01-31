@@ -29,8 +29,8 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100)),
                 ('image', models.CharField(max_length=100)),
                 ('status', models.CharField(max_length=100)),
-                ('latitude', models.DecimalField(decimal_places=9, max_digits=20)),
-                ('longitude', models.DecimalField(decimal_places=9, max_digits=20)),
+                ('latitude', models.DecimalField(decimal_places=20, max_digits=30)),
+                ('longitude', models.DecimalField(decimal_places=20, max_digits=30)),
             ],
         ),
         migrations.CreateModel(

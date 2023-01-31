@@ -11,8 +11,7 @@ const ScooterService = {
     },
 
     createScooter(data) {
-        console.log(data);
-        // return api().post("/scooter", { 'scooter': data });
+        return api().post("/scooter", { 'scooter': data });
     },
 
     deleteScooter(slug) {

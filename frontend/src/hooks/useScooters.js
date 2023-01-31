@@ -17,20 +17,19 @@ export function useScooters() {
     }, [oneScooter]);
 
     const useAddScooter = useCallback(data => {
-        console.log(data);
-        // ScooterService.createScooter(data)
-        // .then(({ data, status }) => {
-        //     if (status === 200) {
-        //         toast.success('Scooter created successfully');
-        //         setScooters([...scooters, data]);
-        //         setIsCorrect(true);
-        //         setTimeout(() => { setIsCorrect(false); }, 1000);
-        //     }
-        // })
-        // .catch(e => {
-        //     console.error(e);
-        //     toast.error('Create scooter error');
-        // });
+        ScooterService.createScooter(data)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    toast.success('Scooter added successfully');
+                    setScooters([...scooters, data]);
+                    setIsCorrect(true);
+                    setTimeout(() => { setIsCorrect(false); }, 1000);
+                }
+            })
+            .catch(e => {
+                console.error(e);
+                toast.error('Add new scooter error');
+            });
     }, []);
 
     const useUpdateScooter = useCallback((slug, data) => {
@@ -41,15 +40,14 @@ export function useScooters() {
     }, []);
 
     const useDeleteScooter = (slug) => {
-        console.log(slug);
-        // ScooterService.deleteScooter(slug)
-        // .then(({ data, status }) => {
-        //     if (status === 200) {
-        //         toast.success(data.data);
-        //         setScooters(scooters.filter(scooter => scooter.slug !== slug));
-        //     }
-        // })
-        // .catch(e => console.error(e));
+        ScooterService.deleteScooter(slug)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    toast.success(data.data);
+                    setScooters(scooters.filter(scooter => scooter.slug !== slug));
+                }
+            })
+            .catch(e => console.error(e));
     }
 
     return { isCorrect, scooters, setScooters, useOneScooter, oneScooter, setOneScooter, useAddScooter, useUpdateScooter, useDeleteScooter }}

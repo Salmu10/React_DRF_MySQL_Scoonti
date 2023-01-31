@@ -100,28 +100,3 @@ class SlotView(viewsets.GenericViewSet):
             slots = Slot.objects.all()
         serializer = SlotSerializer(slots, many=True)
         return Response(serializer.data)
-
-    def detach_scooter(self, request, id):
-        saved_slot = Slot.objects.all(pk=id)
-
-        saved_scooter_id = SlotSerializer.to_Slot(saved_slot)
-
-        saved_scooter = Scooter.objects.all(pk=saved_scooter_id['scooter_id'])
-        data = {'status': 'used'}
-        serializer = ScooterSerializer(instance=saved_scooter, data=data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-
-        slot_context = {'scooter_id': 0, 'status': 'unused'}
-        serializer_slot = SlotSerializer.update(
-            instance=saved_slot, context=slot_context)
-
-        return Response(SlotSerializer.to_Slot(serializer_slot))
-
-    def put_status_only(self, request, id):
-        saved_slot = Slot.objects.all(pk=id)
-        slot_data = request.data.get('slot')
-        slot_context = {'scooter_id': 0, 'status': slot_data['status']}
-        serializer_slot = SlotSerializer.update(instance=saved_slot, context=slot_context)
-
-        return Response(SlotSerializer.to_Slot(serializer_slot))

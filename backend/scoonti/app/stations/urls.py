@@ -21,7 +21,4 @@ urlpatterns = [
     # Slots
     path('slot', SlotView.as_view({'get': 'getSlots'})),
     path('slot/<int:id>', SlotView.as_view({"get": "getSlots"})),
-    path('slot', SlotView.as_view({'post': 'post'})),
-    path('slot/<str:slug>', SlotView.as_view({'put': 'put'})),
-    path('slot/<str:slug>', SlotView.as_view({'delete': 'delete'})),
 ]
