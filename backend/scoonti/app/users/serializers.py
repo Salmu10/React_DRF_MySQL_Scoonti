@@ -27,6 +27,7 @@ class userSerializer(serializers.ModelSerializer):
                 'type': user.type
             },
             'token': user.token,
+            'ref_token': user.ref_token,
         }
 
     def login(context):
@@ -47,7 +48,8 @@ class userSerializer(serializers.ModelSerializer):
                 'email': user.email,
                 'type': user.type
             },
-            'token': user.token
+            'token': user.token,
+            'ref_token': user.ref_token,
         }
 
     def getUser(context):

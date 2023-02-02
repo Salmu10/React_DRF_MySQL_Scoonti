@@ -10,7 +10,7 @@ export function useAuth() {
     const [ errorMSG, setErrorMSG ] = useState("");
 
     const useRegister = useCallback((data) => {
-        AuthService.Register({ 'user': data })
+        AuthService.Register(data)
             .then(({ data, status }) => {
                 if (status == 200) {
                     JwtService.saveToken(data.token);
@@ -32,7 +32,7 @@ export function useAuth() {
     }, []);
 
     const useLogin = useCallback((data) => {
-        AuthService.Login({ 'user': data })
+        AuthService.Login(data)
             .then(({ data, status }) => {
                 if (status === 200) {
                     JwtService.saveToken(data.token);

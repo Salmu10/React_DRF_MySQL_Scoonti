@@ -32,10 +32,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     @property
     def token(self):
-        return self.generate_token_jwt()
+        return self.generate_token_jwt(1080)
+    
+    @property
+    def ref_token(self):
+        return self.generate_token_jwt(10800)
 
-    def generate_token_jwt(self):
-        dt = datetime.now() + timedelta(minutes=60)
+    def generate_token_jwt(self, token_time):
+        dt = datetime.now() + timedelta(seconds=token_time)
 
         token = jwt.encode({'username': self.username, 'exp': dt.utcfromtimestamp(dt.timestamp())
         }, settings.SECRET_KEY, algorithm='HS256')
