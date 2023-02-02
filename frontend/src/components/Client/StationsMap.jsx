@@ -1,8 +1,16 @@
+import React, { useState } from 'react';
 import Map, { GeolocateControl, Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./StationsMap.scss"
 
-export default function StationsMap({ stations = [] }) {
+export default function StationsMap({ stations = [], setShow }) {
+    const [markerIndex, setMarkerIndex] = useState(null);
+
+    const button_click = id => {
+        // console.log(id);
+        // console.log(markerIndex);
+    }
+
     return (
         <div className="maps_content">
             <Map
@@ -14,8 +22,24 @@ export default function StationsMap({ stations = [] }) {
 
                 {stations.map((station, id) => {
                     return <Marker key={id} latitude={station.latitude} longitude={station.longitude} color={"#008f88"}/>
-                    // <Popup></Popup>
                 })}
+
+                {stations.map((station, id) => (
+                    <Marker key={id} latitude={station.latitude} longitude={station.longitude} color={"#008f88"}>
+                        <button className="marker_button" onClick={() => { setMarkerIndex(id); button_click(id); setShow(stations[id].id)}}>
+                            <div style={{ backgroundColor: 'transparent', width: 25, height: 50, borderRadius: '50%' }}/>
+                        </button>
+                    </Marker>                
+                ))}
+
+                {markerIndex !== null && (
+                    <Popup latitude={stations[markerIndex].latitude} longitude={stations[markerIndex].longitude} closeButton={true} closeOnClick={false} 
+                        onClose={() => { setMarkerIndex(null); setShow(null) }} anchor="top">
+                        <div className="text-black">
+                            {stations[markerIndex].slug}
+                        </div>
+                    </Popup>
+                )}
             </Map>
         </div>
     );

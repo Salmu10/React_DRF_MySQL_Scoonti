@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from .models import UserManager 
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,15 +14,11 @@ class userSerializer(serializers.ModelSerializer):
 
         username_exist = len(User.objects.filter(username=username))
         email_exist = len(User.objects.filter(email=email))
-        if (email_exist > 0 or username_exist > 0):
-            raise serializers.ValidationError('Username or email already exists.')
 
-        user = User.objects.create(
-            username = username,
-            email = email, 
-            password = password, 
-            type = 'client'
-        )
+        if (email_exist > 0 or username_exist > 0):
+            raise serializers.ValidationError('*Username or email already exists.')
+
+        user = User.objects.create_user(email=email, username=username, password=password)
 
         return {
             'user': {
@@ -39,7 +36,10 @@ class userSerializer(serializers.ModelSerializer):
         try:
             user = User.objects.get(username=username)
         except:
-            raise serializers.ValidationError('User not found.')
+            raise serializers.ValidationError('*User not found.')
+
+        if not user.check_password(password):
+            raise serializers.ValidationError('*Wrong username or password.')
 
         return {
             'user': {
@@ -49,3 +49,20 @@ class userSerializer(serializers.ModelSerializer):
             },
             'token': user.token
         }
+
+    def getUser(context):
+        username = context['username']
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            raise serializers.ValidationError('*User not found.')
+
+        return {
+            'user': {
+                'username': user.username,
+                'email': user.email,
+                'type': user.type
+            },
+        }
+

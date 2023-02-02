@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from 'react'
-// import AuthService from '../services/AuthService';
-// import JwtService from '../services/JwtService';
+import JwtService from '../services/JwtService';
+import AuthService from '../services/AuthService';
 
 const Context = React.createContext({})
 
 export function AuthContextProvider({ children }) {
-    const [token, setToken] = useState();
     const [user, setUser] = useState({});
+    const [token, setToken] = useState(JwtService.getToken ? JwtService.getToken : flase);
     const [isAuth, setIsAuth] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         if (token) {
-            console.log('hola get user');
+            // JwtService.destroyToken();
+            AuthService.GetUser()
+                .then(({ data, status }) => {
+                    if (status === 200) {
+                        setUser(data.user);
+                        setIsAuth(true);
+                        setIsAdmin(data.user.type === 'admin');
+                    }
+                })
+                .catch(e => console.error(e));
         } else {
-            console.log('No hay user');
+            JwtService.destroyToken();
+            setToken(false);
+            setUser({});
+            setIsAuth(false);
+            setIsAdmin(false);
         }
     }, [token]);
 
-    return <Context.Provider value={{ token, setToken, user, setUser, isAuth, setIsAuth, isAdmin, setIsAdmin }}>
+    return <Context.Provider value={{ user, setUser, token, setToken, isAuth, setIsAuth, isAdmin, setIsAdmin }}>
         {children}
     </Context.Provider>
 }

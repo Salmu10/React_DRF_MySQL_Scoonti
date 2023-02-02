@@ -12,6 +12,10 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import SpinnerLoading from './components/SpinnerLoading/SpinnerLoading';
 
+//Guards
+import AuthGuard from './services/guards/AuthGuard';
+import AdminGuard from './services/guards/AdminGuard';
+
 const Home = React.lazy(() => import("./pages/Home/Home"));
 const Rent = React.lazy(() => import( "./pages/Rent/Rent"));
 const Dashboard = React.lazy(() => import( "./pages/Admin/Dashboard"));
@@ -43,17 +47,20 @@ function App() {
                     <Route path="/" element={<Rent/>} />
                     <Route path="/home" element={<Home/>} />
                     <Route path="/rent" element={<Rent/>} />
-                    <Route path="/dashboard" element={<Dashboard/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
-                    
-                    <Route path="/dashboard/stations" element={<StationsList/>}/>
-                    <Route path="/dashboard/stations/add" element={<StationsAdd/>}/>
-                    <Route path="/dashboard/stations/update/:slug" element={<StationsUpdate/>}/>
 
-                    <Route path="/dashboard/scooters" element={<ScootersList/>}/>
-                    <Route path="/dashboard/scooters/add" element={<ScootersAdd/>}/>
-                    <Route path="/dashboard/scooters/update/:slug" element={<ScootersUpdate/>}/>
+                    <Route element={<AdminGuard/>}>
+                      <Route path="/dashboard" element={<Dashboard/>}/>
+                      
+                      <Route path="/dashboard/stations" element={<StationsList/>}/>
+                      <Route path="/dashboard/stations/add" element={<StationsAdd/>}/>
+                      <Route path="/dashboard/stations/update/:slug" element={<StationsUpdate/>}/>
+
+                      <Route path="/dashboard/scooters" element={<ScootersList/>}/>
+                      <Route path="/dashboard/scooters/add" element={<ScootersAdd/>}/>
+                      <Route path="/dashboard/scooters/update/:slug" element={<ScootersUpdate/>}/>
+                    </Route>
                   </Routes>
                 <Footer/>
               </ScooterContextProvider>

@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-    const { isCorrect, useRegister } = useAuth();
+    const { isCorrect, useRegister, errorMSG } = useAuth();
     const form_type = 'register';
     const navigate = useNavigate();
 
@@ -15,7 +15,7 @@ const Register = () => {
     }, [isCorrect, navigate]);
 
     return (
-        <SignUpForm form_type={form_type} sendData={(data) => useRegister(data)}/>
+        <SignUpForm form_type={form_type} sendData={(data) => useRegister(data)} errorMSG={errorMSG}/>
     )
 }
 

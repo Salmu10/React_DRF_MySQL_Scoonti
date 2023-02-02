@@ -9,8 +9,17 @@ from .models import Scooter
 from .serializers import ScooterSerializer
 from .models import Slot
 from .serializers import SlotSerializer
+from rest_framework.permissions import (AllowAny, IsAuthenticated)
+from scoonti.app.core.permissions import IsAdmin
 
 class StationView(viewsets.GenericViewSet):
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = [AllowAny]
+        else:
+            self.permission_classes = [IsAuthenticated, IsAdmin]
+        return super(StationView, self).get_permissions()
 
     def getStations(self, request):
         stations = Station.objects.all()
@@ -48,6 +57,13 @@ class StationView(viewsets.GenericViewSet):
         return Response({'data': 'Station deleted successfully'})
 
 class ScooterView(viewsets.GenericViewSet):
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = [AllowAny]
+        else:
+            self.permission_classes = [IsAuthenticated, IsAdmin]
+        return super(ScooterView, self).get_permissions()
 
     def getScooters(self, request, slug=None):
         scooters = Scooter.objects.all()
@@ -88,6 +104,13 @@ class ScooterView(viewsets.GenericViewSet):
         return Response({'data': 'Scooter deleted successfully'})
 
 class SlotView(viewsets.GenericViewSet):
+
+    def get_permissions(self):
+        if self.request.method == 'GET':
+            self.permission_classes = [AllowAny]
+        else:
+            self.permission_classes = [IsAuthenticated, IsAdmin]
+        return super(SlotView, self).get_permissions()
 
     def getSlots(self, request, id=None):
         if id:

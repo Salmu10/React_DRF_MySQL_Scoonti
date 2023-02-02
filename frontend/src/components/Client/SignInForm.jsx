@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-const SignInForm = ({form_type, sendData}) => {
+const SignInForm = ({form_type, sendData, errorsMSG}) => {
     const navigate = useNavigate();
 
     const validators = Yup.object().shape({
@@ -34,12 +34,12 @@ const SignInForm = ({form_type, sendData}) => {
                 <div className="user_options-text">
                     <div className="user_options-unregistered">
                         <h2 className="user_unregistered-title">Don't have an account?</h2>
-                        <p className="user_unregistered-text">Register now and you can reserve the desired table.</p>
+                        <p className="user_unregistered-text">Register now and you can rent a scooter near you.</p>
                         <button className="user_unregistered-signup" id="signup-button" onClick={() => redirects.register()}>Sign up</button>
                     </div>
                     <div className="user_options-registered">
                         <h2 className="user_registered-title">Have an account?</h2>
-                        <p className="user_registered-text">Sign in with your account and continue with your reserve.</p>
+                        <p className="user_registered-text">Sign in with your account and continue with your scooter renting.</p>
                         <button className="user_registered-login" id="login-button" onClick={() => redirects.login()}>Sign in</button>
                     </div>
                 </div>
@@ -57,6 +57,7 @@ const SignInForm = ({form_type, sendData}) => {
                                     <input type="password" placeholder="Password" className="forms_field-input" {...register('password')}/>
                                     <span className="error">{errors.password?.message}</span>
                                 </div>
+                                <div className="error">{errorsMSG}</div>
                             </fieldset>
                             <div className="forms_buttons">
                                 <input type="submit" value="Sign In" className="forms_buttons-action"/>

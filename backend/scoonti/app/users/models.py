@@ -4,6 +4,21 @@ from django.conf import settings
 from datetime import datetime, timedelta
 import jwt
 
+class UserManager(BaseUserManager):
+    def create_user(self, username, email, password):
+        user = self.model(email=self.normalize_email(email), username=username)
+        user.set_password(password)
+        user.save()
+        return user
+
+    def create_superuser(self, username, email, password):
+        user = self.model(email=self.normalize_email(email), username=username, type='admin')
+        user.is_staff = True
+        user.is_superuser = True
+        user.set_password(password)
+        user.save()
+        return user
+
 class User(AbstractBaseUser, PermissionsMixin):
     uuid = models.CharField('uuid', max_length=36, unique=True, editable=False, null=False)
     username = models.CharField('username', max_length=30, unique=True, null=False)
@@ -13,6 +28,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
+    objects = UserManager()
+
     @property
     def token(self):
         return self.generate_token_jwt()
@@ -20,7 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def generate_token_jwt(self):
         dt = datetime.now() + timedelta(minutes=60)
 
-        token = jwt.encode({'username': self.username, 'exp': int(dt.strftime('%S'))
+        token = jwt.encode({'username': self.username, 'exp': dt.utcfromtimestamp(dt.timestamp())
         }, settings.SECRET_KEY, algorithm='HS256')
 
         return token.decode('utf-8')

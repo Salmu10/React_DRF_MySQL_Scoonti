@@ -1,4 +1,8 @@
 .maps_content {
     width: 100%;
     height: 60vh;
+    .marker_button {
+        background-color: transparent;
+        border: none;
+    }
 }
