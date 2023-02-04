@@ -44,7 +44,7 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
     const read_only = form_type == 'update' ? true : false;
 
     return (
-        <form className='add_form' onSubmit={handleSubmit(send_data)}>
+        <form className='station_form' onSubmit={handleSubmit(send_data)}>
             <div className='name_box'>
                 <label htmlFor="name" className='etiqueta'>Station Name:</label>
                 <input type="text" id="name" {...register('name')}/><br/>

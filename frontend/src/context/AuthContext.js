@@ -13,7 +13,7 @@ export function AuthContextProvider({ children }) {
     useEffect(() => {
         if (token) {
             // JwtService.destroyToken();
-            AuthService.GetUser()
+            AuthService.getUser()
                 .then(({ data, status }) => {
                     if (status === 200) {
                         setUser(data.user);

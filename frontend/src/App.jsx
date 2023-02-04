@@ -30,6 +30,8 @@ const ScootersList = React.lazy(() => import('./pages/Admin/Scooter/ScootersList
 const ScootersAdd = React.lazy(() => import('./pages/Admin/Scooter/ScootersAdd'));
 const ScootersUpdate = React.lazy(() => import('./pages/Admin/Scooter/ScootersUpdate'));
 
+const Profile = React.lazy(() => import('./pages/Client/Profile'));
+
 function App() {
   return (
     <div className="App">
@@ -60,6 +62,10 @@ function App() {
                       <Route path="/dashboard/scooters" element={<ScootersList/>}/>
                       <Route path="/dashboard/scooters/add" element={<ScootersAdd/>}/>
                       <Route path="/dashboard/scooters/update/:slug" element={<ScootersUpdate/>}/>
+                    </Route>
+
+                    <Route element={<AuthGuard/>}>
+                      <Route path="/profile/:id" element={<Profile/>}/>
                     </Route>
                   </Routes>
                 <Footer/>

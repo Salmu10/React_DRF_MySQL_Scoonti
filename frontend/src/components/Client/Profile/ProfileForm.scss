@@ -1,0 +1,103 @@
+.profile_container {
+    min-height: 80vh;
+    .title {
+        text-align: center;
+        padding: 20px;
+        h2 {
+            margin-top: 3%;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #333;
+        }
+    }
+    .profile {
+        display: grid;
+        width: 70%;
+        margin: auto;
+        padding: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        justify-content: space-around;
+        align-items: center;
+        .profile_image {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 2;
+            .user_image {
+                width: 200px;
+                height: 200px;
+                overflow: hidden;
+                border: 4px solid #008f88;
+                box-shadow: 0 2px 2px rgba(0,0,0, 0.3);
+                border-radius: 100px;
+            }
+            input {
+                display: block;
+                margin: auto;
+                margin-top: 20px;
+                border: 1px solid #008f88;
+                padding-left: 5px;
+                padding-right: 5px;
+                width: 280px;
+                &:disabled {
+                    background-color: #dbd4d4;
+                }
+            }
+        }
+        .profile_user {
+            grid-column-start: 2;
+            grid-column-end: 3;
+            grid-row-start: 1;
+            grid-row-end: 2;
+            text-align: left;
+            .attribute_box {
+                display: block;
+                padding: 15px;
+                .etiqueta {
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+                input {
+                    display: block;
+                    margin-left: 30px;
+                    float: right;
+                    border: 1px solid #008f88;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    width: 280px;
+                    &:disabled {
+                        background-color: #dbd4d4;
+                    }
+                }
+            }
+        }
+        .profile_bio {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row-start: 2;
+            grid-row-end: 3;
+            // text-align: left;
+            .attribute_box {
+                display: block;
+                padding: 15px;
+                .etiqueta {
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+                textarea {
+                    display: block;
+                    margin-left: 10px;
+                    float: right;
+                    border: 1px solid #008f88;
+                    padding-left: 5px;
+                    padding-right: 5px;
+                    width: 500px;
+                    &:disabled {
+                        background-color: #dbd4d4;
+                    }
+                }
+            }
+        }
+    }
+}

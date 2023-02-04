@@ -35,7 +35,7 @@ const ScootersForm = ({scooter= {slug: '', name: '', status: ''}, form_type, sen
     const button_type = form_type == 'create' ? 'Create' : 'Update';
 
     return (
-        <form className='add_form' onSubmit={handleSubmit(send_data)}>
+        <form className='scooter_form' onSubmit={handleSubmit(send_data)}>
             <div className='name_box'>
                 <label htmlFor="name" className='etiqueta'>Scooter Name:</label>
                 <input type="text" id="name" {...register('name')}/><br/>

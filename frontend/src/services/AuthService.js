@@ -10,8 +10,12 @@ const AuthService = {
         return api().post('login', { 'user': data });
     },
 
-    GetUser() {
+    getUser() {
         return api().get('user');
+    },
+
+    getProfile(id) {
+        return api().get(`profile/${id}`);
     }
 }
 

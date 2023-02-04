@@ -7,7 +7,8 @@ import { toast } from "react-toastify";
 export function useAuth() {
     const { user, setUser, token, setToken, isAuth, setIsAuth, isAdmin, setIsAdmin } = useContext(AuthContext);
     const [isCorrect, setIsCorrect] = useState(false);
-    const [ errorMSG, setErrorMSG ] = useState("");
+    const [profile, setProfile] = useState({});
+    const [errorMSG, setErrorMSG] = useState("");
 
     const useRegister = useCallback((data) => {
         AuthService.Register(data)
@@ -62,5 +63,27 @@ export function useAuth() {
         toast.success('Loged out successfully');
     }, []);
 
-    return { isCorrect, user, setUser, useRegister, useLogin, useLogout, errorMSG, setErrorMSG }
+    const useProfile = useCallback((id) => {
+        AuthService.getProfile(id)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    setProfile(data);
+                }
+            })
+            .catch(e => console.error(e));
+    }, [profile]);
+
+    const useUpdateProfile = useCallback((id, data) => {
+        console.log(id);
+        console.log(data);
+        // AuthService.getProfile(id)
+        //     .then(({ data, status }) => {
+        //         if (status === 200) {
+        //             setProfile(data);
+        //         }
+        //     })
+        //     .catch(e => console.error(e));
+    }, []);
+
+    return { isCorrect, user, setUser, useRegister, useLogin, useLogout, profile, setProfile, useProfile, useUpdateProfile, errorMSG, setErrorMSG }
 }

@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 class Station(models.Model):
-
     slug = models.SlugField(max_length=100, unique=True, editable=False)
     name = models.CharField(max_length=100)
     image = models.CharField(max_length=100)
@@ -23,7 +22,6 @@ class Scooter(models.Model):
         return str(self.id)
 
 class Slot(models.Model):
-
     station = models.ForeignKey(Station, on_delete=models.CASCADE, null=False, related_name="slots")
     scooter = models.OneToOneField(Scooter, on_delete=models.CASCADE, null=True, unique=True, related_name="slots")
     status = models.CharField(max_length=100)

@@ -56,7 +56,7 @@ class SlotSerializer(serializers.ModelSerializer):
         station = Station.objects.get(pk=station_id)
 
         if station is None:
-            raise serializers.ValidationError('Station is not find')
+            raise serializers.ValidationError('Station not found')
 
         slot = Slot.objects.create(station_id=station_id, scooter_id=None, status="vacant")
         slot.save()

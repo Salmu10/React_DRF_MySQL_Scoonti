@@ -15,10 +15,14 @@ export default function Header () {
         dashboard: () => navigate('/dashboard'),
         login: () => navigate('/login'),
         register: () => navigate('/register'),
+        profile: (id) => navigate('/profile/' + id),
     }
 
-    const isUser = isAuth ? <a className="link" onClick={() => useLogout()}>Logout</a>
-    : <a className="link" onClick={() => redirects.login()}>Sig in</a>;
+    const isUser = isAuth ? <li className="link" onClick={() => useLogout()}>Logout</li>
+    : "";
+
+    const isUsername = isAuth ? <li className="link" onClick={() => redirects.profile(user.id)}>{user.username}</li>
+    : <li className="link" onClick={() => redirects.login()}>Sig in</li>;
 
     const isAdminUser = isAdmin ? <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a> : '';
 
@@ -29,15 +33,16 @@ export default function Header () {
                     <img src="/assets/Logo.png" alt="logo"/>
                 </div>
                 <nav>
-                    <div className="nav_buttons">
-                        <a className="link" onClick={() => redirects.home()}>Home</a>
-                        <a className="link" onClick={() => redirects.rent()}>Rent</a>
+                    <ul className="nav_buttons">
+                        <li className="link" onClick={() => redirects.home()}>Home</li>
+                        <li className="link" onClick={() => redirects.rent()}>Rent</li>
                         {isAdminUser}
+                        {isUsername}
                         {isUser}
                         {/* <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a> */}
                         {/* <a className="link" onClick={() => redirects.login()}>Login</a> */}
                         {/* <a className="link" onClick={() => redirects.register()}>Register</a> */}
-                    </div>
+                    </ul>
                 </nav>
             </div>
         </header>

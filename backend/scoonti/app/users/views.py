@@ -1,6 +1,8 @@
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .serializers import userSerializer
+from .models import Profile
+from .serializers import ProfileSerializer
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser)
 
 class UserView(viewsets.GenericViewSet):
@@ -15,6 +17,7 @@ class UserView(viewsets.GenericViewSet):
         }
 
         serializer = userSerializer.register(serializer_context)
+        ProfileSerializer.create(context=serializer['user'])
         return Response(serializer)
 
     def login(self, request):
@@ -42,3 +45,22 @@ class UserInfoView(viewsets.GenericViewSet):
     def logout(self, request):
 
         return Response()
+
+class ProfileView(viewsets.GenericViewSet):
+    permission_classes = (IsAuthenticated,)
+
+    def getProfile(self, request, id):
+        profile = Profile.objects.get(user_id=id)
+        # print(profile)
+        profile_serializer = ProfileSerializer(profile, many=False)
+        return Response(profile_serializer.data)
+
+    def put(self, request, id):
+        profile_data = request.data
+        return Response(profile_data)
+  
+    def delete(self, request, id):
+        profile = Profile.objects.get(id=id)
+        # profile.delete()
+        # return Response({'data': 'Profile deleted successfully'})
+        return Response(profile)

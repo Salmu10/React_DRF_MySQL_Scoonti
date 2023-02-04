@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import User
-from .models import UserManager 
+from .models import Profile 
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,6 +22,7 @@ class userSerializer(serializers.ModelSerializer):
 
         return {
             'user': {
+                'id': user.id,
                 'username': user.username,
                 'email': user.email,
                 'type': user.type
@@ -44,6 +45,7 @@ class userSerializer(serializers.ModelSerializer):
 
         return {
             'user': {
+                'id': user.id,
                 'username': user.username,
                 'email': user.email,
                 'type': user.type
@@ -62,9 +64,42 @@ class userSerializer(serializers.ModelSerializer):
 
         return {
             'user': {
+                'id': user.id,
                 'username': user.username,
                 'email': user.email,
                 'type': user.type
             },
         }
 
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = ['id', 'user', 'name', 'surnames', 'image', 'biography']
+
+    def to_Profile(instance):
+        return {
+            "id": instance.id,
+            "user": instance.user,
+            "name": instance.name,
+            "surnames": instance.surnames,
+            "image": instance.image,
+            "biography": instance.biography,
+        }
+
+    def create(context):
+        user_id = context['id']
+        user = User.objects.get(pk=user_id)
+
+        if user is None:
+            raise serializers.ValidationError('User not found')
+
+        profile = Profile.objects.create(
+            user_id=user_id, 
+            name="", 
+            surnames="",
+            image="https://avatars.dicebear.com/api/adventurer/" + context['username'] + ".svg",
+            biography="Hello im a scoonti user")
+
+        profile.save()
+        return profile
