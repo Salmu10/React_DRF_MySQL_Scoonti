@@ -42,6 +42,14 @@ class UserInfoView(viewsets.GenericViewSet):
 
         return Response(serializer)
 
+    def refreshToken(self, request):
+        username = request.user
+
+        serializer_context = { 'username': username }
+
+        serializer = userSerializer.refreshToken(serializer_context)
+        return Response(serializer)
+
     def logout(self, request):
 
         return Response()
@@ -56,11 +64,19 @@ class ProfileView(viewsets.GenericViewSet):
         return Response(profile_serializer.data)
 
     def put(self, request, id):
-        profile_data = request.data
-        return Response(profile_data)
+        current_user = request.user
+        data_user = request.data.get('user')
+        data_profile = request.data.get('profile')
+        serializer_profile = ProfileSerializer.update(current_user=current_user, user_context=data_user, profile_context=data_profile)
+        return Response(serializer_profile)
   
     def delete(self, request, id):
-        profile = Profile.objects.get(id=id)
+        profile = Profile.objects.get(user_id=id)
+        # data = request.data.get('station')
+        # serializer = ProfileSerializer(instance=profile, data=data, partial=True)
+        # if (serializer.is_valid(raise_exception=True)):
+        #     serializer.save()
+        # return Response(serializer.data)
         # profile.delete()
         # return Response({'data': 'Profile deleted successfully'})
         return Response(profile)

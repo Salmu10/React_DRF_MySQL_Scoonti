@@ -7,17 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-const SignUpForm = ({form_type, sendData, errorsMSG}) => {
+const SignInForm = ({form_type, sendData, errorMSG}) => {
     const navigate = useNavigate();
 
-    const validators_register = Yup.object().shape({
+    const validators = Yup.object().shape({
         username: Yup.string().required('*Username is required').min(3, '*Username must be between 3 and 15 characters').max(15, '*Username must be between 3 and 15 characters'),
-        email: Yup.string().email('*Email format invalid').required('*Email is required'),
         password: Yup.string().required('*Password is required').min(5, '*Password must have at least 5 characters'),
-        password_2: Yup.string().oneOf([Yup.ref('password'), null], '*Passwords must match'),
     });
 
-    const {register, handleSubmit, formState: {errors} } = useForm({resolver: yupResolver(validators_register)});
+    const {register, handleSubmit, formState: {errors} } = useForm({resolver: yupResolver(validators)});
 
     const send_data = data => {
         sendData(data);
@@ -45,38 +43,31 @@ const SignUpForm = ({form_type, sendData, errorsMSG}) => {
                         <button className="user_registered-login" id="login-button" onClick={() => redirects.login()}>Sign in</button>
                     </div>
                 </div>
+                
                 <div id="user_options-forms" className={bounce_type}>
-                    <div className="user_forms-signup">
-                        <h2 className="forms_title">Sign Up</h2>
-                        <form className="forms_form" onSubmit={handleSubmit(send_data)}>
+                    <div className="user_forms-login">
+                        <h2 className="forms_title">Sign in</h2>
+                        <form className="forms_form" id="login_form" onSubmit={handleSubmit(send_data)}>
                             <fieldset className="forms_fieldset">
                                 <div className="forms_field">
-                                    <input type="text" placeholder="Username" className="forms_field-input" {...register('username')}/>
+                                    <input type="name" placeholder="Username" className="forms_field-input" {...register('username')} autoFocus/>
                                     <span className="error">{errors.username?.message}</span>
-                                </div>
-                                <div className="forms_field">
-                                    <input type="email" placeholder="Email" className="forms_field-input" {...register('email')}/>
-                                    <span className="error">{errors.email?.message}</span>
                                 </div>
                                 <div className="forms_field">
                                     <input type="password" placeholder="Password" className="forms_field-input" {...register('password')}/>
                                     <span className="error">{errors.password?.message}</span>
                                 </div>
-                                <div className="forms_field">
-                                    <input type="password" placeholder="Repeat password" className="forms_field-input" {...register('password_2')}/>
-                                    <span className="error">{errors.password_2?.message}</span>
-                                </div>
-                                <div className="error">{errorsMSG}</div>
+                                <div className="error">{errorMSG}</div>
                             </fieldset>
                             <div className="forms_buttons">
-                                <input type="submit" value="Sign up" className="forms_buttons-action"/>
+                                <input type="submit" value="Sign In" className="forms_buttons-action"/>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-    </div>
+        </div>
     )
 }
 
-export default SignUpForm;
+export default SignInForm;

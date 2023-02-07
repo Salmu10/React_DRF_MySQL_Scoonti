@@ -69,6 +69,20 @@ class userSerializer(serializers.ModelSerializer):
                 'email': user.email,
                 'type': user.type
             },
+            'token': user.token,
+            'ref_token': user.ref_token,
+        }
+
+    def refreshToken(context):
+        username = context['username']
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            raise serializers.ValidationError('Username not valid.')
+
+        return {
+            'token': user.token
         }
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -99,7 +113,72 @@ class ProfileSerializer(serializers.ModelSerializer):
             name="", 
             surnames="",
             image="https://avatars.dicebear.com/api/adventurer/" + context['username'] + ".svg",
-            biography="Hello im a scoonti user")
+            biography="Hello, I'm a scoonti user")
 
         profile.save()
         return profile
+
+    def update(current_user, user_context, profile_context):
+        user_id = profile_context['id']
+        user = User.objects.get(pk=user_id)
+
+        newName = profile_context['name']
+        newSurnames = profile_context['surnames']
+        newImage = profile_context['image']
+        newBiography = profile_context['biography']
+
+        newUsername = user_context['username']
+        newEmail = user_context['email']
+
+        if user is None:
+            raise serializers.ValidationError('User not found')
+
+        if user != current_user:
+            raise serializers.ValidationError('Invalid access')
+
+        if newUsername != user.username: 
+            username_exist = len(User.objects.filter(username=newUsername))
+            print(username_exist)
+            if (username_exist > 0):
+                raise serializers.ValidationError('*Username already exists.')
+            User.objects.filter(username=current_user).update(
+                username = newUsername,
+            )
+
+        if newEmail != user.email: 
+            email_exist = len(User.objects.filter(email=newEmail))
+            print(email_exist)
+            if (email_exist > 0):
+                raise serializers.ValidationError('*Email already exists.')
+            User.objects.filter(username=current_user).update(
+                email = newEmail,
+            )
+
+        newUser = User.objects.get(username=newUsername)
+        
+        Profile.objects.filter(user_id=user_id).update(
+            name = newName,
+            surnames = newSurnames,
+            image = newImage,
+            biography = newBiography
+        )
+
+        profile = Profile.objects.get(user_id=user_id)
+
+        return {
+            'user': {
+                'id': newUser.id,
+                'username': newUser.username,
+                'email': newUser.email,
+                'type': newUser.type
+            },
+            'profile': {
+                'id': profile.id,
+                'name': profile.name,
+                'surnames': profile.surnames,
+                'image': profile.image,
+                'biography': profile.biography,
+            },
+            'token': newUser.token,
+            'ref_token': newUser.ref_token,
+        }

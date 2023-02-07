@@ -6,8 +6,8 @@ import { useAuth } from "../../hooks/useAuth";
 
 export default function Header () {
     const navigate = useNavigate();
-    const { user, isAuth, isAdmin } = useContext(AuthContext);
-    const { useLogout } = useAuth();
+    const { user, isAuth, isAdmin, logout } = useContext(AuthContext);
+    // const { useLogout } = useAuth();
 
     const redirects = {
         home: () => navigate('/home'),
@@ -18,11 +18,11 @@ export default function Header () {
         profile: (id) => navigate('/profile/' + id),
     }
 
-    const isUser = isAuth ? <li className="link" onClick={() => useLogout()}>Logout</li>
+    const isUser = isAuth ? <li className="link" onClick={() => logout()}>Log out</li>
     : "";
 
     const isUsername = isAuth ? <li className="link" onClick={() => redirects.profile(user.id)}>{user.username}</li>
-    : <li className="link" onClick={() => redirects.login()}>Sig in</li>;
+    : <li className="link" onClick={() => redirects.login()}>Sign in</li>;
 
     const isAdminUser = isAdmin ? <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a> : '';
 

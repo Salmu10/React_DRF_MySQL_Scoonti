@@ -14,9 +14,21 @@ const AuthService = {
         return api().get('user');
     },
 
+    refreshToken() {
+        return api().get('refresh_token');
+    },
+
     getProfile(id) {
         return api().get(`profile/${id}`);
-    }
+    },
+
+    updateProfile(id, user_data, profile_data) {
+        return api().put(`profile/${id}`, { 'user': user_data, 'profile': profile_data } );
+    },
+
+    deleteStation(id) {
+        return api().delete(`profile/${id}`);
+    },
 }
 
 export default AuthService;

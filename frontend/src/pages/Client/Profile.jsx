@@ -6,21 +6,22 @@ import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
     const { id } = useParams();
-    const { user, useProfile, profile, useUpdateProfile } = useAuth(id);
+    const { isCorrect, user, useProfile, profile, useUpdateProfile, errorMSG } = useAuth(id);
     const navigate = useNavigate();
 
     useEffect(() => {
-        // console.log(user);
         useProfile(id);
-    }, []);
+        if (isCorrect) {
+            navigate('/home');
+        }
+    }, [isCorrect, navigate]);
 
     return (
         <div className="profile_container">
             <div className="title">
                 <h2>Profile</h2>
             </div>
-            <ProfileForm user={user} profile={profile} sendData={(data) => useUpdateProfile(id, data)}/>
-                {/* sendData={(data) => useUpdateProfile(id, data)} */}
+            <ProfileForm user={user} profile={profile} sendData={(data) => useUpdateProfile(id, data)} errorMSG={errorMSG}/>
         </div>
     )
 }
