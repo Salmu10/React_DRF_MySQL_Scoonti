@@ -6,7 +6,7 @@ const StationsList = () => {
 
     const {stations, useDeleteStation} = useStations();
 
-    return (
+    return (        
         <StationsListAdmin stations={stations} deleteStation={useDeleteStation}/>
     )
 }

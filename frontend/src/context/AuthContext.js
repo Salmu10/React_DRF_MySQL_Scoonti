@@ -35,19 +35,10 @@ export function AuthContextProvider({ children }) {
                         logout();
                     }
                 });
-        } 
-        // else {
-        //     if (JwtService.getRefreshToken()) {
-        //         refresh_token();
-        //     } else {
-        //         console.log('hola');
-        //         logout();
-        //     }
-        // }
+        }
     }, [token]);
 
     const refresh_token = async () => {
-        console.log('hola refresh');
         JwtService.destroyToken();
         await AuthService.refreshToken()
             .then(({ data }) => {
@@ -70,7 +61,6 @@ export function AuthContextProvider({ children }) {
         toast.success('Loged out successfully');
         navigate('/home');
     }, []);
-
 
     return <Context.Provider value={{ user, setUser, token, setToken, isAuth, setIsAuth, isAdmin, setIsAdmin, logout }}>
         {children}

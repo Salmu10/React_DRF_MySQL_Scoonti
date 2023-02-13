@@ -11,7 +11,7 @@ const StationsForm = ({station= {slug: '', name: '', status: '', image: '', lati
     const navigate = useNavigate();
 
     const validators = Yup.object().shape({
-        name: Yup.string().required('*Name is required').min(3).max(15),
+        name: Yup.string().required('*Name is required').min(3).max(50),
         status: Yup.string().required('*Status is required'),
         image: Yup.string().url().required('*Image is required').min(3).max(100),
         latitude: Yup.number().required('*Latitude is required').min(-180).max(180),

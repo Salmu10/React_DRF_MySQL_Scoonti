@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Home.scss';
 import { useStations } from "../../hooks/useStations";
-import StationsMap from "../../components/Client/StationsMap.jsx";
+import StationsMap from "../../components/Client/Map/StationsMap.jsx";
 import SpinnerLoading from "../../components/SpinnerLoading/SpinnerLoading";
 
 export default function Home() {

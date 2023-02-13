@@ -1,12 +1,27 @@
 import {useContext, useCallback, useEffect, useState} from 'react';
 import StationService from '../services/StationService';
 import StationContext from "../context/StationsContext";
+import SlotService from '../services/SlotService';
 import { toast } from "react-toastify";
+import { useSlots } from './useSlots';
 
 export function useStations() {
     const {stations, setStations} = useContext(StationContext);
     const [oneStation, setOneStation] = useState({});
     const [isCorrect, setIsCorrect] = useState(false);
+    const [stationSlots, setStationSlots] = useState([]);
+    const { slots, setSlots } = useSlots();
+
+    useEffect(() => {
+        const station = { 'station_id': oneStation.id };
+        SlotService.getAllSlots(station)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    setStationSlots(data);
+                }
+            })
+            .catch(e => console.error(e));
+    }, [oneStation]);
 
     const useOneStation = useCallback((slug) => {
         StationService.getOneStation(slug)
@@ -58,4 +73,4 @@ export function useStations() {
         .catch(e => console.error(e));
     }
 
-    return { isCorrect, stations, setStations, useOneStation, oneStation, setOneStation, useAddStation, useUpdateStation, useDeleteStation }}
+    return { isCorrect, stations, setStations, stationSlots, setStationSlots, useOneStation, oneStation, setOneStation, useAddStation, useUpdateStation, useDeleteStation }}

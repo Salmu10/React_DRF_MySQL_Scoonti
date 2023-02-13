@@ -1,10 +1,16 @@
 import './StationCard.scss';
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function StationCard ({ station }) {
-    // console.log(station);
+    const navigate = useNavigate();
+
+    const redirects = {
+        details: (slug) => navigate('/stations/' + slug),
+    }
+
     return (
-        <div className="card 1">
+        <div className="card 1" onClick={() => redirects.details(station.slug)}>
             <div className="card_image">
                 <img src="/assets/estacion.jpeg"/> 
             </div>
@@ -12,14 +18,5 @@ export default function StationCard ({ station }) {
                 <p>{station.name}</p>
             </div>
         </div>
-        
-        // <div className="card w-96 bg-base-100">
-        //     <figure>
-        //     { station.image != null ? "hola image" : "Hola no image" } 
-        //     </figure>
-        //     <div className="card-body">
-        //         <h2 className="card-title font-bold text-xl">{station.name}</h2>
-        //     </div>
-        // </div>
     )
 }

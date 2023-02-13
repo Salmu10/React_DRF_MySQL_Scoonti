@@ -40,6 +40,7 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(max_length=100)),
                 ('scooter', models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='slots', to='stations.scooter')),
                 ('station', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='slots', to='stations.station')),
+                ('slot_number', models.IntegerField()),
             ],
         ),
     ]

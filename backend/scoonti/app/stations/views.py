@@ -40,7 +40,7 @@ class StationView(viewsets.GenericViewSet):
             slots = request.data.get('slot')
             slot_station = {'station_id': serializer.data['id']}
             for i in range(slots['num_slots']):
-                SlotSerializer.create(context=slot_station)
+                SlotSerializer.create(context=slot_station, number=i)
         return Response(serializer.data)
 
     def put(self, request, slug):
@@ -92,7 +92,7 @@ class ScooterView(viewsets.GenericViewSet):
         slot = request.data.get('slot')
         if (slot):
             if slot['id'] is not None:
-                slot_context = {'scooter_id': scooter.id, 'status': 'used'}
+                slot_context = {'scooter_id': scooter.id, 'status': 'in_use'}
                 saved_slot = Slot.objects.get(pk=slot['id'])
                 SlotSerializer.update(instance=saved_slot, context=slot_context)
 
@@ -112,14 +112,16 @@ class SlotView(viewsets.GenericViewSet):
             self.permission_classes = [IsAuthenticated, IsAdmin]
         return super(SlotView, self).get_permissions()
 
-    def getSlots(self, request, id=None):
-        if id:
-            slot = Slot.objects.all(pk=id)
-            serializer_one = SlotSerializer(slot)
-            return Response(serializer_one.data)
+    def getSlots(self, request):
         if request.GET.get('station_id') is not None:
             slots = Slot.objects.filter(station_id=request.GET.get('station_id'))
         else:
             slots = Slot.objects.all()
+
         serializer = SlotSerializer(slots, many=True)
         return Response(serializer.data)
+
+    def getOneSlot(self, request, id):
+        slot = Slot.objects.all(pk=id)
+        slot_serializer = SlotSerializer(slot)
+        return Response(slot_serializer.data)

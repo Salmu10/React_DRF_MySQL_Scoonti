@@ -25,6 +25,7 @@ class Slot(models.Model):
     station = models.ForeignKey(Station, on_delete=models.CASCADE, null=False, related_name="slots")
     scooter = models.OneToOneField(Scooter, on_delete=models.CASCADE, null=True, unique=True, related_name="slots")
     status = models.CharField(max_length=100)
+    slot_number = models.IntegerField()
 
     def __str__(self):
         return str(self.id)

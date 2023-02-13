@@ -66,6 +66,7 @@ const SignUpForm = ({form_type, sendData, errorMSG}) => {
                                     <input type="password" placeholder="Repeat password" className="forms_field-input" {...register('password_2')}/>
                                     <span className="error">{errors.password_2?.message}</span>
                                 </div>
+                                <br/>
                                 <div className="error">{errorMSG}</div>
                             </fieldset>
                             <div className="forms_buttons">

@@ -51,13 +51,40 @@ class SlotSerializer(serializers.ModelSerializer):
             "status": instance.status,
         }
 
-    def create(context):
+    def create(context, number):
         station_id = context['station_id']
         station = Station.objects.get(pk=station_id)
 
         if station is None:
             raise serializers.ValidationError('Station not found')
 
-        slot = Slot.objects.create(station_id=station_id, scooter_id=None, status="vacant")
+        slot = Slot.objects.create(station_id=station_id, scooter_id=None, status="vacant", slot_number=number+1)
         slot.save()
         return slot
+
+    def update(context, instance):
+        scooter_id = context['scooter_id']
+        context_status = context['status']
+
+        if context_status == 'manteinance':
+            instance.status = 'manteinance'
+            instance.save()
+            return instance
+
+        if scooter_id != 0 and instance.scooter_id is not None:
+            raise serializers.ValidationError('Slot is already in use')
+
+        if scooter_id != 0 and not None:
+            scooter = Scooter.objects.get(pk=scooter_id)
+            if scooter is None:
+                raise serializers.ValidationError('Scooter not found')
+
+            instance.scooter_id = scooter_id
+            instance.status = "in_use"
+
+        if scooter_id == 0:
+            instance.scooter_id = None
+            instance.status = "vacant"
+
+        instance.save()
+        return instance

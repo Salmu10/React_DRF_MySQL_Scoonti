@@ -57,6 +57,7 @@ const SignInForm = ({form_type, sendData, errorMSG}) => {
                                     <input type="password" placeholder="Password" className="forms_field-input" {...register('password')}/>
                                     <span className="error">{errors.password?.message}</span>
                                 </div>
+                                <br/>
                                 <div className="error">{errorMSG}</div>
                             </fieldset>
                             <div className="forms_buttons">
