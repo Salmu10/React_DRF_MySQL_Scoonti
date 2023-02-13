@@ -41,7 +41,7 @@ class SlotSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Slot
-        fields = ['id', 'station_id', 'scooter_id', 'status']
+        fields = ['id', 'station_id', 'scooter_id', 'status', 'slot_number']
 
     def to_Slot(instance):
         return {
@@ -49,6 +49,7 @@ class SlotSerializer(serializers.ModelSerializer):
             "station_id": instance.station_id,
             "scooter_id": instance.scooter_id,
             "status": instance.status,
+            "slot_number": instance.slot_number,
         }
 
     def create(context, number):

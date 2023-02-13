@@ -1,14 +1,16 @@
 import './SlotCard.scss';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AuthContext from "../../../context/AuthContext";
 import { useRent } from "../../../hooks/useRent";
+import { useNavigate } from "react-router-dom";
 
 export default function SlotCard ({ slot }) {
+    const navigate = useNavigate();
     const { isAuth } = useContext(AuthContext);
-    const { useRentScooter, useBringBackScooter } = useRent();
+    const { isCorrect, useRentScooter, useBringBackScooter } = useRent();
 
     const img_background = slot.status === 'in_use' ? 'green' : slot.status === 'vacant' ? 'red' : 'yellow';
-    const slot_status = slot.status === 'in_use' ? 'In use' : slot.status === 'vacant' ? 'Vacant' : 'Maintenance';
+    const slot_status = slot.status === 'in_use' ? 'Scooter available' : slot.status === 'vacant' ? 'Vacant' : 'Maintenance';
 
     const rent_scooter = (slot) => {
         if (isAuth) {
@@ -22,13 +24,21 @@ export default function SlotCard ({ slot }) {
         }
     }
 
+    useEffect(() => {
+        if (isCorrect) {
+            navigate('/home');
+        }
+    }, [isCorrect, navigate]);
+
     return (
         <div className="card" onClick={() => { rent_scooter(slot) }}>
+            
             <div className="card_image">
                 <img src="/assets/scooter.png" style={{ backgroundColor: `${img_background}` }}/> 
             </div>
             <div className="card_title title-white">
                 <p>{slot_status}</p>
+                <p>Slot: {slot.slot_number}</p>
             </div>
         </div>
     )

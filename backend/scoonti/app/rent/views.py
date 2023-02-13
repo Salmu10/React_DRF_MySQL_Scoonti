@@ -8,34 +8,29 @@ from .models import Rent
 class RentView(viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
 
-    def rent(self, request):
-        data = request.data['rentScooter']
+    def rent(self, request, slot_id):
         username = request.user
-
-        serializer_context = { 'username': username, 'slot_id': data['initial_slot'] }
-
+        serializer_context = { 'username': username, 'slot_id': slot_id }
         serializer = RentSerializer.rent(context=serializer_context)
-
         return Response(RentSerializer.to_rent(serializer))
 
     def getOneRent(self, request):
         username = request.user
-
         serializer_context = { 'username': username }
-
         serializer = RentSerializer.getOneRent(context=serializer_context)
-
         return Response(RentSerializer.to_rent(serializer))
 
     def bringbackScooter(self, request):
-        data = request.data['bringbackScooter']
+        data = request.data['scooter']
         username = request.user
 
-        serializer_context = { 'username': username, 'slot_id': data['end_slot'], 'scooter_id': data['scooter_id']
+        serializer_context = { 
+            'username': username, 
+            'slot_id': data['end_slot'], 
+            'scooter_id': data['scooter_id']
         }
 
         serializer = RentSerializer.bringbackScooter(context=serializer_context)
-
         return Response(RentSerializer.to_rent(serializer))
 
 class RentAdminView(viewsets.GenericViewSet):
