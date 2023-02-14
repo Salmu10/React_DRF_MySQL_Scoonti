@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Station
 from .models import Scooter
 from .models import Slot
+from random import randint
 
 class StationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -89,3 +90,20 @@ class SlotSerializer(serializers.ModelSerializer):
 
         instance.save()
         return instance
+
+    def create_slot_dummys(context):
+        station_id = context['station_id']
+        status = context['status']
+        number = context['slot_number'] + 1
+        scooters = Scooter.objects.filter(status='in_use')
+
+        if (status == 'in_use' and len(scooters) > 0):
+            scooter = Scooter.objects.get(pk=scooters[randint(0, len(scooters)-1)].id)
+            slot = Slot.objects.create(station_id=station_id, scooter_id=scooter.id, status="in_use", slot_number=number)
+            scooter.status = 'vacant'
+            scooter.save()
+        else:
+            slot = Slot.objects.create(station_id=station_id, scooter_id=None, status="vacant", slot_number=number)
+            
+        slot.save()
+        return slot
