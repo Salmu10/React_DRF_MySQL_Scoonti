@@ -6,11 +6,14 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export function useAuth() {
+    const navigate = useNavigate();
     const { user, setUser, token, setToken, isAuth, setIsAuth, isAdmin, setIsAdmin } = useContext(AuthContext);
     const [isCorrect, setIsCorrect] = useState(false);
     const [profile, setProfile] = useState({});
     const [errorMSG, setErrorMSG] = useState("");
-    const navigate = useNavigate();
+    const [userScooter, setUserScooter] = useState({});
+    const [error_scooterMSG, setError_scooterMSG] = useState("");
+    const [stats, setStats] = useState(0);
 
     const useRegister = useCallback((data) => {
         AuthService.Register(data)
@@ -105,6 +108,33 @@ export function useAuth() {
             });
     }, []);
 
+    const useUserScooter = useCallback(() => {
+        AuthService.getUserScooter()
+            .then(({ data, status }) => {
+                if (status == 200) {
+                    setError_scooterMSG('');
+                    setUserScooter(data);
+                }
+            })
+            .catch((e) => {
+                // console.error(e);
+                setError_scooterMSG('You have not rented any scooter.');
+                console.error('You have not rented any scooter.')
+            });
+    }, [userScooter]);
 
-    return { isCorrect, user, setUser, useRegister, useLogin, profile, setProfile, useProfile, useUpdateProfile, errorMSG, setErrorMSG }
+    const useUserStats = useCallback((id) => {
+        AuthService.getUserStats(id)
+            .then(({ data, status }) => {
+                if (status == 200) {
+                    setStats(data);
+                }
+            })
+            .catch((e) => {
+                toast.error(e.response.data[0]);
+            });
+    }, [stats]);
+
+
+    return { isCorrect, user, setUser, useRegister, useLogin, profile, setProfile, useProfile, useUpdateProfile, errorMSG, setErrorMSG, userScooter, setUserScooter, useUserScooter, error_scooterMSG, setError_scooterMSG, stats, setStats, useUserStats }
 }

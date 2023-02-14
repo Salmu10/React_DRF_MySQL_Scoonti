@@ -89,6 +89,9 @@ class RentSerializer(serializers.ModelSerializer):
         if new_slot is None or new_slot.scooter_id is not None:
             raise serializers.ValidationError('Slot not found or in use')
 
+        if new_slot.status == "manteinance":
+            raise serializers.ValidationError('Slot in manteinance')
+
         rent.end_slot_id = new_slot.id
         rent.end_date = datetime.now()
         rent.save()

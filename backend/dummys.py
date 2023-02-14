@@ -5,23 +5,21 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'scoonti.settings')
 django.setup()
 from scoonti.app.stations.serializers import StationSerializer, ScooterSerializer, SlotSerializer
 
-stations_name = ["Estación L'estació", "Estación Jaume I", "Estación Sant Rafael", "Estación Polideportivo", "Estación el Teler"]
+stations_name = ["L'estació Station", "Jaume I Station", "Sant Rafael Staion", "Polideportivo Station", "El Teler Station"]
 stations_latitude = [38.810110519255254, 38.82172053366386, 38.82593542292847, 38.81333890018974, 38.82427600593147]
 stations_longitude = [-0.6047567310730674, -0.5980932125218063, -0.6137625255400939, -0.6091280620636682, -0.6032185939310202]
 stations_image = ["Estacion_1.jpg", "Estacion_2.jpg", "Estacion_3.jpg", "Estacion_4.jpg", "Estacion_5.jpg"]
-stations_img_cant = len(stations_image) - 1
 status = ['in_use', 'vacant']
 
 def create_scooter(n):
     for i in range(n):
         scooter = {
             'status': 'in_use',
-            'name': 'Scooter' + str((i + 1))
+            'name': 'Scooter ' + str((i + 1))
         }
         serializer = ScooterSerializer(data=scooter)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-
 
 def create_stations(n, n_slot):
     for i in range(n):

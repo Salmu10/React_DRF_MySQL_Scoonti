@@ -9,7 +9,7 @@ export default function SlotCard ({ slot }) {
     const { isAuth } = useContext(AuthContext);
     const { isCorrect, useRentScooter, useBringBackScooter } = useRent();
 
-    const img_background = slot.status === 'in_use' ? 'green' : slot.status === 'vacant' ? 'red' : 'yellow';
+    const img_background = slot.status === 'in_use' ? '#27EE27' : slot.status === 'vacant' ? '#FF1818' : '#FFFF37';
     const slot_status = slot.status === 'in_use' ? 'Scooter available' : slot.status === 'vacant' ? 'Vacant' : 'Maintenance';
 
     const rent_scooter = (slot) => {
@@ -35,7 +35,7 @@ export default function SlotCard ({ slot }) {
             <div className="card_image">
                 <img src="/assets/scooter.png" style={{ backgroundColor: `${img_background}` }}/> 
             </div>
-            <div className="card_title title-white">
+            <div className="card_title title-black">
                 <p>Slot: {slot.slot_number}</p>
                 <p>{slot_status}</p>
             </div>

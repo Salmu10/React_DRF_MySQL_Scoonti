@@ -17,6 +17,43 @@
             color: #333;
         }
     }
+    .leyenda {
+        text-align: left;
+        padding: 20px;
+        padding-left: 100px;
+        .slot_rojo, .slot_verde, .slot_amarillo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: left;
+            padding: 5px;
+            margin: auto;
+            .cuadrado_rojo {
+                width: 20px;
+                height: 20px;
+                background: #FF1818;
+                border: 1px solid #333;
+            }
+            .cuadrado_verde {
+                width: 20px;
+                height: 20px;
+                background: #27EE27;
+                border: 1px solid #333;
+            }
+            .cuadrado_amarillo {
+                width: 20px;
+                height: 20px;
+                background: #FFFF37;
+                border: 1px solid #333;
+            }
+            .texto_rojo, .texto_verde, .texto_amarillo {
+                margin-left: 10px;
+                margin-top: auto;
+                margin-bottom: auto;
+            }
+        }
+
+    }
     .slots_cards-list {
         z-index: 0;
         width: 100%;
@@ -24,6 +61,7 @@
         grid-template-columns: repeat(4, 1fr);
         gap: 50px;
         padding: 80px;
+        padding-top: 40px;
         // flex-wrap: wrap;
         .card {
             // margin: 30px auto;

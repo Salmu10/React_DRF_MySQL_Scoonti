@@ -19,7 +19,7 @@ export default function Header () {
     }
 
     const isUser = isAuth ? <li className="link" onClick={() => logout()}>Log out</li>
-    : "";
+    : <li className="link" onClick={() => redirects.register()}>Sign up</li>;
 
     const isUsername = isAuth ? <li className="link" onClick={() => redirects.profile(user.id)}>{user.username}</li>
     : <li className="link" onClick={() => redirects.login()}>Sign in</li>;

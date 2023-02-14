@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from 'react-toastify';
 import RentService from "../services/RentService";
@@ -45,10 +45,13 @@ export function useRent() {
                                 setTimeout(() => { setIsCorrect(false); }, 1000);
                             }
                         })
+                        .catch((e) => {
+                            toast.error(e.response.data[0]);
+                        });
                 }
             })
             .catch(() => {
-                toast.warning("You don't have any bike")
+                toast.warning("You don't have any scooter")
             });
     }
 

@@ -1,6 +1,15 @@
 .home_container {
     min-height: 80vh;
     padding: 20px;
+    .title {
+        text-align: center;
+        padding: 20px;
+        h1 {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #333;
+        }
+    }
     .maps {
         display: block;
         width: 70%;

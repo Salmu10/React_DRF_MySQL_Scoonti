@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from .serializers import userSerializer
 from .models import Profile
 from .serializers import ProfileSerializer
+from scoonti.app.stations.serializers import ScooterSerializer
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser)
 
 class UserView(viewsets.GenericViewSet):
@@ -36,22 +37,23 @@ class UserInfoView(viewsets.GenericViewSet):
 
     def getUser(self, request):
         username = request.user
-
         serializer_context = { 'username': username }
         serializer = userSerializer.getUser(context=serializer_context)
-
         return Response(serializer)
 
     def refreshToken(self, request):
         username = request.user
-
         serializer_context = { 'username': username }
-
         serializer = userSerializer.refreshToken(serializer_context)
         return Response(serializer)
 
-    def logout(self, request):
+    def getUserScooter(self, request):
+        username = request.user
+        serializer_context = { 'username': username }
+        serializer = ScooterSerializer.getUserScooter(context=serializer_context)
+        return Response(ScooterSerializer.to_Scooter(serializer))
 
+    def logout(self, request):
         return Response()
 
 class ProfileView(viewsets.GenericViewSet):
@@ -59,7 +61,6 @@ class ProfileView(viewsets.GenericViewSet):
 
     def getProfile(self, request, id):
         profile = Profile.objects.get(user_id=id)
-        # print(profile)
         profile_serializer = ProfileSerializer(profile, many=False)
         return Response(profile_serializer.data)
 
@@ -70,13 +71,7 @@ class ProfileView(viewsets.GenericViewSet):
         serializer_profile = ProfileSerializer.update(current_user=current_user, user_context=data_user, profile_context=data_profile)
         return Response(serializer_profile)
   
-    def delete(self, request, id):
-        profile = Profile.objects.get(user_id=id)
-        # data = request.data.get('station')
-        # serializer = ProfileSerializer(instance=profile, data=data, partial=True)
-        # if (serializer.is_valid(raise_exception=True)):
-        #     serializer.save()
-        # return Response(serializer.data)
-        # profile.delete()
-        # return Response({'data': 'Profile deleted successfully'})
-        return Response(profile)
+    def getStats(self, request, id):
+        current_user = request.user
+        serializer = ProfileSerializer.getStats(current_user=current_user, id=id)
+        return Response(serializer)

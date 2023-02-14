@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import User
-from .models import Profile 
+from .models import Profile
+from scoonti.app.rent.models import Rent
+from scoonti.app.stations.models import Scooter
 
 class userSerializer(serializers.ModelSerializer):
     class Meta:
@@ -141,18 +143,14 @@ class ProfileSerializer(serializers.ModelSerializer):
             print(username_exist)
             if (username_exist > 0):
                 raise serializers.ValidationError('*Username already exists.')
-            User.objects.filter(username=current_user).update(
-                username = newUsername,
-            )
+            User.objects.filter(username=current_user).update(username = newUsername)
 
         if newEmail != user.email: 
             email_exist = len(User.objects.filter(email=newEmail))
             print(email_exist)
             if (email_exist > 0):
                 raise serializers.ValidationError('*Email already exists.')
-            User.objects.filter(username=current_user).update(
-                email = newEmail,
-            )
+            User.objects.filter(username=current_user).update(email = newEmail)
 
         newUser = User.objects.get(username=newUsername)
         
@@ -182,3 +180,15 @@ class ProfileSerializer(serializers.ModelSerializer):
             'token': newUser.token,
             'ref_token': newUser.ref_token,
         }
+
+    def getStats(current_user, id):
+        user = User.objects.get(pk=id)
+
+        if user is None:
+            raise serializers.ValidationError('User not found')
+
+        if user != current_user:
+            raise serializers.ValidationError('Invalid access')
+            
+        total_stats = len(Rent.objects.filter(user_id=id))
+        return total_stats

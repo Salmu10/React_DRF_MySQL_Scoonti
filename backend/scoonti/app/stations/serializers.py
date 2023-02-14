@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Station
 from .models import Scooter
 from .models import Slot
+from scoonti.app.rent.models import Rent
+from scoonti.app.users.models import User
 from random import randint
 
 class StationSerializer(serializers.ModelSerializer):
@@ -37,6 +39,22 @@ class ScooterSerializer(serializers.ModelSerializer):
             "name": instance.name,
             "status": instance.status,
         }
+    
+    def getUserScooter(context):
+        username = context['username']
+        user = User.objects.get(username=username)
+        if user is None:
+            raise serializers.ValidationError('User not found')
+
+        rent = Rent.objects.get(user_id=user.id, end_slot_id=None)
+        if rent is None:
+            raise serializers.ValidationError('You have not rented any scooter')
+
+        scooter = Scooter.objects.get(pk=rent.scooter_id)
+        if scooter is None:
+            raise serializers.ValidationError('Error retreiving the scooter')
+
+        return scooter
 
 class SlotSerializer(serializers.ModelSerializer):
 
