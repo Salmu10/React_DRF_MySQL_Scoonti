@@ -32,13 +32,12 @@ export default function SlotCard ({ slot }) {
 
     return (
         <div className="card" onClick={() => { rent_scooter(slot) }}>
-            
             <div className="card_image">
                 <img src="/assets/scooter.png" style={{ backgroundColor: `${img_background}` }}/> 
             </div>
             <div className="card_title title-white">
-                <p>{slot_status}</p>
                 <p>Slot: {slot.slot_number}</p>
+                <p>{slot_status}</p>
             </div>
         </div>
     )

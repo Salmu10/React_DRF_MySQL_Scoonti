@@ -8,16 +8,16 @@ function AdminGuard() {
     const navigate = useNavigate();
     const { isAdmin } = useContext(AuthContext);
 
-    if (!isAdmin) {
-        AuthService.getUser()
-            .then(({ data, status }) => {
-                if (status == 200) {
-                    if (data.user.type == "admin") {
-                        setTimeout(() => { navigate("/dashboard"); }, 200);
-                    }
-                }
-            })
-    }
+    // if (!isAdmin) {
+    //     AuthService.getUser()
+    //         .then(({ data, status }) => {
+    //             if (status == 200) {
+    //                 if (data.user.type == "admin") {
+    //                     setTimeout(() => { navigate("/dashboard"); }, 200);
+    //                 }
+    //             }
+    //         })
+    // }
 
     return isAdmin ? <Outlet/> : <Navigate to="/home"/>
 }

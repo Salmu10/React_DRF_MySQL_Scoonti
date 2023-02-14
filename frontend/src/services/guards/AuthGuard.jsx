@@ -9,15 +9,15 @@ function AuthGuard() {
     const navigate = useNavigate();
     const { isAuth } = useContext(AuthContext);
 
-    if (!isAuth) {
-        AuthService.getUser()
-            .then(({ status }) => {
-                console.log(status);
-                if (status == 200) {
-                    setTimeout(() => { navigate('/home'); }, 200);
-                }
-            })
-    }
+    // if (!isAuth) {
+    //     AuthService.getUser()
+    //         .then(({ status }) => {
+    //             console.log(status);
+    //             if (status == 200) {
+    //                 setTimeout(() => { navigate('/home'); }, 200);
+    //             }
+    //         })
+    // }
 
     return isAuth ? <Outlet/> : <Navigate to="/login"/>
 }
