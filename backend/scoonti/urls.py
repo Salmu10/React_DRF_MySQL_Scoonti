@@ -6,4 +6,5 @@ urlpatterns = [
     path('api/', include('scoonti.app.stations.urls')),
     path('api/', include('scoonti.app.users.urls')),
     path('api/', include('scoonti.app.rent.urls')),
+    # path('api/', include('scoonti.app.incidents.urls')),
 ]

@@ -31,10 +31,10 @@ SECRET_KEY = 'thisismygoodside'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0', 'localhost', '172.20.10.3']
 
 CORS_ORIGIN_ALLOW_ALL = False
-CORS_ORIGIN_WHITELIST = ( 'http://localhost:3000', )
+CORS_ORIGIN_WHITELIST = ( 'http://localhost:3000', 'http://172.20.10.3:3000')
 
 # Application definition
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'scoonti.app.stations',
     'scoonti.app.users',
     'scoonti.app.rent',
+    'scoonti.app.incidents',
 ]
 
 MIDDLEWARE = [
