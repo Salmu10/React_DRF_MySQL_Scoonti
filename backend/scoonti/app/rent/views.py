@@ -30,15 +30,13 @@ class RentView(viewsets.GenericViewSet):
 class RentAdminView(viewsets.GenericViewSet):
     permission_classes = [IsAdmin]
 
-    def getAll(self, request):
+    def getAllRents(self, request):
         data = Rent.objects.all()
         serializer = RentSerializer(data, many=True)
         return Response(serializer.data)
 
-    def delete(self, request, id):
-        context = {"rent_id": id}
-        if RentSerializer.delete(context=context):
-            return Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    def deleteRent(self, request, id):
+        rent = Rent.objects.get(id=id)
+        rent.delete()
+        return Response({'data': 'Rent deleted successfully'})
 

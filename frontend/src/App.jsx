@@ -40,6 +40,7 @@ const ScootersAdd = React.lazy(() => import('./pages/Admin/Scooter/ScootersAdd')
 const ScootersUpdate = React.lazy(() => import('./pages/Admin/Scooter/ScootersUpdate'));
 
 const UsersList = React.lazy(() => import('./pages/Admin/User/UsersList'));
+const RentsList = React.lazy(() => import('./pages/Admin/Rent/RentsList'));
 
 const Profile = React.lazy(() => import('./pages/Client/Profile'));
 const NotificationsUser = React.lazy(() => import('./pages/Client/NotificationsUser'));
@@ -79,6 +80,7 @@ function App() {
                             <Route path="/dashboard/scooters/update/:slug" element={<ScootersUpdate/>}/>
 
                             <Route path="/dashboard/users" element={<UsersList/>}/>
+                            <Route path="/dashboard/rents" element={<RentsList/>}/>
                           </Route>
 
                           <Route element={<AuthGuard/>}>

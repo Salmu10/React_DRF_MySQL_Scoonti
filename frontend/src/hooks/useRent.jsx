@@ -5,19 +5,23 @@ import RentService from "../services/RentService";
 
 export function useRent() {
     const navigate = useNavigate();
+    const [rents, setRents] = useState([]);
     const [isCorrect, setIsCorrect] = useState(false);
     const { pathname } = useLocation();
 
     useEffect(() => {
         const path = pathname.split('/')[1];
         if (path === 'dashboard') {
-            console.log('hola admin');
+            RentService.getAllRents()
+                .then(({ data, status }) => {
+                    if (status === 200) {
+                        setRents(data);
+                    }
+                })
+                .catch(e => console.error(e));
         }
     }, []);
 
-    const useDeleteRentMultiple = async (ids) => {
-    }
-    
     const useRentScooter = (slot) => {
         RentService.rentScooter(slot)
             .then(({ data, status }) => {
@@ -55,5 +59,17 @@ export function useRent() {
             });
     }
 
-    return { isCorrect, setIsCorrect, useDeleteRentMultiple, useRentScooter, useBringBackScooter }
+    const useDeleteRent = (id) => {
+        RentService.deleteRent(id)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    setRents(rents.filter(rent => rent.id !== id));
+                    toast.success(data.data);
+                }
+            })
+            .catch(e => console.error(e));
+    }
+    
+
+    return { isCorrect, setIsCorrect, rents, setRents, useRentScooter, useBringBackScooter, useDeleteRent }
 }
