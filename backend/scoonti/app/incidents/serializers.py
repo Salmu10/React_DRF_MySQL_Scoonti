@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from .models import IncidentSlot, IncidentScooter, Notification
+from .models import IncidenceSlot, IncidenceScooter, Notification
 from scoonti.app.users.models import User
 from scoonti.app.stations.models import Slot, Scooter
 
-class IncidentSlotSerializer(serializers.ModelSerializer):
+class IncidenceSlotSerializer(serializers.ModelSerializer):
     class Meta:
-        model = IncidentSlot
+        model = IncidenceSlot
         fields = [ 'title', 'status', 'desc', 'user_id', 'slot_id']
 
     def to_incident(instance):
@@ -38,13 +38,13 @@ class IncidentSlotSerializer(serializers.ModelSerializer):
         if desc is None:
             raise serializers.ValidationError('Body is required')
 
-        incident = IncidentSlot.objects.create(title=title, desc=desc, user_id=user.id, slot_id=slot.id)
+        incident = IncidenceSlot.objects.create(title=title, desc=desc, user_id=user.id, slot_id=slot.id)
 
         incident.save()
         return incident
 
     def updateStatus(slug):
-        incident = IncidentSlot.objects.get(slug=slug)
+        incident = IncidenceSlot.objects.get(slug=slug)
 
         if incident is None:
             raise serializers.ValidationError('Slot not found')
@@ -67,75 +67,75 @@ class IncidentSlotSerializer(serializers.ModelSerializer):
         if user is None:
             raise serializers.ValidationError('User not found')
 
-        incidents = IncidentSlot.objects.filter(user_id=user.id)
+        incidents = IncidenceSlot.objects.filter(user_id=user.id)
         return incidents
 
-# class IncidentScooterSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = IncidentScooter
-#         fields = [ 'title', 'status', 'desc', 'user_id', 'scooter_id']
+class IncidenceScooterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IncidenceScooter
+        fields = [ 'title', 'status', 'desc', 'user_id', 'scooter_id']
 
-#     def to_incident(instance):
-#         return ({
-#             "title": instance.title,
-#             "status": instance.status,
-#             "desc": instance.desc,
-#             "user_id": instance.user_id,
-#             "scooter_id": instance.scooter_id
-#         })
+    def to_incident(instance):
+        return ({
+            "title": instance.title,
+            "status": instance.status,
+            "desc": instance.desc,
+            "user_id": instance.user_id,
+            "scooter_id": instance.scooter_id
+        })
 
-#     def create(context):
-#         username = context['username']
-#         scooter_id = context['scooter_id']
-#         title = context['title']
-#         desc = context['desc']
+    def create(context):
+        username = context['username']
+        scooter_id = context['scooter_id']
+        title = context['title']
+        desc = context['desc']
 
-#         user = User.objects.get(username=username)
+        user = User.objects.get(username=username)
 
-#         if user is None:
-#             raise serializers.ValidationError('User not found')
+        if user is None:
+            raise serializers.ValidationError('User not found')
 
-#         scooter = Scooter.objects.get(pk=scooter_id)
-#         if scooter is None:
-#             raise serializers.ValidationError('Scooter not found')
+        scooter = Scooter.objects.get(pk=scooter_id)
+        if scooter is None:
+            raise serializers.ValidationError('Scooter not found')
 
-#         if title is None:
-#             raise serializers.ValidationError('Title is required')
+        if title is None:
+            raise serializers.ValidationError('Title is required')
 
-#         if desc is None:
-#             raise serializers.ValidationError('Body is required')
+        if desc is None:
+            raise serializers.ValidationError('Body is required')
 
-#         incident = IncidentScooter.objects.create(title=title, desc=desc, user_id=user.id, scooter_id=scooter.id)
+        incident = IncidenceScooter.objects.create(title=title, desc=desc, user_id=user.id, scooter_id=scooter.id)
 
-#         incident.save()
-#         return incident
+        incident.save()
+        return incident
 
-#     def updateStatus(slug):
-#         incident = IncidentScooter.objects.get(slug=slug)
+    def updateStatus(slug):
+        incident = IncidenceScooter.objects.get(slug=slug)
 
-#         if incident is None:
-#             raise serializers.ValidationError('Scooter not found')
+        if incident is None:
+            raise serializers.ValidationError('Scooter not found')
 
-#         if (incident.status == 'pending'):
-#             incident.status = 'in_progress'
-#         elif (incident.status == 'in_progress'):
-#             incident.status = 'in_revision'
-#         elif (incident.status == 'in_revision'):
-#             incident.status = 'resolved'
-#         else:
-#             raise serializers.ValidationError('The incident is closed')
+        if (incident.status == 'pending'):
+            incident.status = 'in_progress'
+        elif (incident.status == 'in_progress'):
+            incident.status = 'in_revision'
+        elif (incident.status == 'in_revision'):
+            incident.status = 'resolved'
+        else:
+            raise serializers.ValidationError('The incident is closed')
 
-#         incident.save()
-#         return incident
+        incident.save()
+        return incident
 
-#     def getIncidentsUser(username):
-#         user = User.objects.get(username=username)
+    def getIncidentsUser(username):
+        user = User.objects.get(username=username)
 
-#         if user is None:
-#             raise serializers.ValidationError('User not found')
+        if user is None:
+            raise serializers.ValidationError('User not found')
 
-#         incidents = IncidentScooter.objects.filter(user_id=user.id)
-#         return incidents
+        incidents = IncidenceScooter.objects.filter(user_id=user.id)
+        return incidents
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta:

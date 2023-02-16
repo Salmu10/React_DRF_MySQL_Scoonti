@@ -2,7 +2,7 @@ from django.db import models
 from scoonti.app.users.models import User
 from scoonti.app.stations.models import Slot, Scooter
 
-class IncidentSlot(models.Model):
+class IncidenceSlot(models.Model):
 
     title = models.CharField(max_length=30)
     status = models.CharField(max_length=100, default='pendiente')
@@ -13,7 +13,7 @@ class IncidentSlot(models.Model):
     def __str__(self):
         return str(self.id)
 
-class IncidentScooter(models.Model):
+class IncidenceScooter(models.Model):
 
     title = models.CharField(max_length=30)
     status = models.CharField(max_length=100, default='pendiente')

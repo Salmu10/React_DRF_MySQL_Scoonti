@@ -4,14 +4,14 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import (IsAuthenticated, AllowAny)
 from scoonti.app.core.permissions import IsAdmin
 from .models import Incident
-from .serializers import IncidentSlotSerializer, IncidentScooterSerializer, NotificationSerializer
+from .serializers import IncidenceSlotSerializer, IncidenceScooterSerializer, NotificationSerializer
 
-class IncidentSlotView(viewsets.GenericViewSet):
+class IncidenceSlotView(viewsets.GenericViewSet):
 
     def get_permissions(self):
         if self.request.method == 'POST':
             self.permission_classes = [IsAuthenticated]
         else:
             self.permission_classes = [IsAdmin]
-        return super(IncidentSlotView, self).get_permissions()
+        return super(IncidenceSlotView, self).get_permissions()
 

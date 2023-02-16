@@ -4,6 +4,11 @@ import { ToastContainer } from 'react-toastify';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.scss';
 
+// fontAwesome
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+library.add(fas);
+
 import { StationContextProvider } from './context/StationsContext';
 import { ScooterContextProvider } from './context/ScootersContext';
 import { SlotContextProvider } from './context/SlotsContext';
