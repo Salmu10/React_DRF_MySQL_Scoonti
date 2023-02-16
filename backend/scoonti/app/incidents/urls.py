@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import IncidenceSlotView, IncidenceScooterView
+from .views import IncidenceSlotView, IncidenceScooterView, NotificationsView
 
 urlpatterns = [
     # SLOT INCIDENTS
@@ -11,4 +11,7 @@ urlpatterns = [
     path('scooter_incidents', IncidenceScooterView.as_view({"get": "getScootersIncidents"})),
     path('scooter_incidents/<str:id>', IncidenceScooterView.as_view({"get": "get"})),
     path('scooter_incidence', IncidenceScooterView.as_view({"post": "post"})),
+
+    # NOTIFICATIONS
+    path('notifications', NotificationsView.as_view({"get": "get"})),
 ]

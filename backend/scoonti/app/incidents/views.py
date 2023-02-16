@@ -22,7 +22,7 @@ class IncidenceSlotView(viewsets.GenericViewSet):
 
     def post(self, request):
         data = request.data['slot_incidence']
-        
+
         serializer_context = {
             'username': request.user,
             'slot_id': data['slot_id'],
@@ -32,7 +32,6 @@ class IncidenceSlotView(viewsets.GenericViewSet):
 
         incidence = IncidenceSlotSerializer.create(serializer_context)
         return Response(IncidenceSlotSerializer.to_incidence_slot(incidence))
-
 
 class IncidenceScooterView(viewsets.GenericViewSet):
 
@@ -61,4 +60,15 @@ class IncidenceScooterView(viewsets.GenericViewSet):
         incidence = IncidenceScooterSerializer.create(serializer_context)
         return Response(IncidenceScooterSerializer.to_incidence_scooter(incidence))
 
+class NotificationsView(viewsets.GenericViewSet):
+    permission_classes = [IsAuthenticated]
 
+    def get(self, request):
+        notifications_serializer = NotificationSerializer.getUserNotification(request.user)
+        notifications = NotificationSerializer(notifications_serializer, many=True)
+        return Response(notifications.data)
+
+    def seenNotification(self, request, id):
+        serializer_context = { 'username': request.user, 'id': id }
+        serializer = NotificationSerializer.seeNotification(context=serializer_context)
+        return Response(NotificationSerializer.to_notification(serializer))

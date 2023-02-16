@@ -111,6 +111,8 @@ class IncidenceScooterSerializer(serializers.ModelSerializer):
     def updateStatus(slug):
         incidence = IncidenceScooter.objects.get(slug=slug)
 
+        print(incidence)
+
         if incidence is None:
             raise serializers.ValidationError('Scooter not found')
 
@@ -118,8 +120,10 @@ class IncidenceScooterSerializer(serializers.ModelSerializer):
             incidence.status = 'in_progress'
         elif (incidence.status == 'in_progress'):
             incidence.status = 'in_revision'
+            Notification.objects.create(desc="The incidence: is in progress.", user_id=2, seen=False)
         elif (incidence.status == 'in_revision'):
             incidence.status = 'resolved'
+            Notification.objects.create(desc="The incidence: is resolved.", user_id=2, seen=False)
         else:
             raise serializers.ValidationError('The incidence is closed')
 
