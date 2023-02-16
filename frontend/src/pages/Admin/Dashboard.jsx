@@ -9,6 +9,9 @@ const Dashboard = () => {
         stations: () => navigate('/dashboard/stations'),
         slots: () => navigate('/dashboard/slots'),
         scooters: () => navigate('/dashboard/scooters'),
+        users: () => navigate('/dashboard/users'),
+        rents: () => navigate('/dashboard/rents'),
+        icidents: () => navigate('/dashboard/icidents'),
     }
     
     return (
@@ -16,8 +19,11 @@ const Dashboard = () => {
             <h1>Dashboard</h1>
             <div className="buttons_box">
                 <button className="button" onClick={() => redirects.stations()}><span>Stations List</span></button>
-                <button className="button" onClick={() => redirects.slots()}><span>Slots List</span></button>
                 <button className="button" onClick={() => redirects.scooters()}><span>Scooter List</span></button>
+                <button className="button" onClick={() => redirects.slots()}><span>Slots List</span></button>
+                <button className="button" onClick={() => redirects.users()}><span>Users List</span></button>
+                <button className="button" onClick={() => redirects.rents()}><span>Rents List</span></button>
+                <button className="button" onClick={() => redirects.icidents()}><span>Incidents List</span></button>
             </div>
         </div>
     )

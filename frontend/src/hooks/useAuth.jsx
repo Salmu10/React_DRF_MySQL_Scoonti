@@ -3,7 +3,7 @@ import AuthContext from "../context/AuthContext";
 import AuthService from "../services/AuthService";
 import JwtService from "../services/JwtService";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useInRouterContext, useNavigate } from "react-router-dom";
 
 export function useAuth() {
     const navigate = useNavigate();
@@ -14,6 +14,15 @@ export function useAuth() {
     const [userScooter, setUserScooter] = useState({});
     const [error_scooterMSG, setError_scooterMSG] = useState("");
     const [stats, setStats] = useState(0);
+    const [allUsers, setAllUsers] = useState([]);
+
+    const useAllUsers = useCallback(() => {
+        AuthService.getAllUsers()
+            .then(({data}) => {
+                setAllUsers(data);
+            })
+            .catch(e => console.error(e));
+    }, [allUsers]);
 
     const useRegister = useCallback((data) => {
         AuthService.Register(data)
@@ -135,6 +144,16 @@ export function useAuth() {
             });
     }, [stats]);
 
+    const useDeleteUser = (uuid) => {
+        AuthService.deleteUser(uuid)
+        .then(({ data, status }) => {
+            if (status === 200) {
+                setAllUsers(allUsers.filter(user => user.uuid !== uuid));
+                toast.success(data.data);
+            }
+        })
+        .catch(e => console.error(e));
+    }
 
-    return { isCorrect, user, setUser, useRegister, useLogin, profile, setProfile, useProfile, useUpdateProfile, errorMSG, setErrorMSG, userScooter, setUserScooter, useUserScooter, error_scooterMSG, setError_scooterMSG, stats, setStats, useUserStats }
+    return { isCorrect, user, setUser, allUsers, setAllUsers, useAllUsers, useRegister, useLogin, profile, setProfile, useProfile, useUpdateProfile, errorMSG, setErrorMSG, userScooter, setUserScooter, useUserScooter, error_scooterMSG, setError_scooterMSG, stats, setStats, useUserStats, useDeleteUser }
 }

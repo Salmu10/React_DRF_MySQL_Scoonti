@@ -33,10 +33,24 @@ export function useScooters() {
     }, []);
 
     const useUpdateScooter = useCallback((slug, data) => {
-        console.log(slug);
-        console.log(data);
-        setIsCorrect(true);
-        setTimeout(() => { setIsCorrect(false); }, 1000);
+        ScooterService.updateScooter(slug, data)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    let old_scooters = [...scooters];
+                    const index = old_scooters.findIndex(item => item.slug === slug);
+                    if (index !== -1) {
+                        old_scooters[index] = data;
+                        setScooters(old_scooters);
+                    }
+                    toast.success('Scooter updated successfully');
+                    setIsCorrect(true);
+                    setTimeout(() => { setIsCorrect(false); }, 1000);
+                }
+            })
+            .catch(e => {
+                console.error(e);
+                toast.error('Update scooter error');
+            });
     }, []);
 
     const useDeleteScooter = (slug) => {

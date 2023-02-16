@@ -14,6 +14,10 @@ const StationService = {
         return api().post("/station", { 'station': data, 'slot': { 'num_slots': slots } });
     },
 
+    updateStation(slug, data) {
+        return api().put(`station/${slug}`, { 'station': data });
+    },
+
     deleteStation(slug) {
         return api().delete(`station/${slug}`);
     },

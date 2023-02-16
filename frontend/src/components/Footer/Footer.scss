@@ -2,11 +2,12 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
-    padding: 1em 0;
+    // padding: 1em 0;
     background-color: #008f88;
     color: white;
     align-items: center;
     justify-content: center;
+    height: 10vh;
     .page_logo_box {
         grid-column-start: 1;
         grid-column-end: 2;

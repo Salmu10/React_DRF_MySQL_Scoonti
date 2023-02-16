@@ -1,10 +1,11 @@
 from rest_framework.response import Response
 from rest_framework import viewsets
 from .serializers import userSerializer
-from .models import Profile
+from .models import User, Profile
 from .serializers import ProfileSerializer
 from scoonti.app.stations.serializers import ScooterSerializer
 from rest_framework.permissions import (AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated, IsAdminUser)
+from scoonti.app.core.permissions import IsAdmin
 
 class UserView(viewsets.GenericViewSet):
     permission_classes = (AllowAny,)
@@ -55,6 +56,19 @@ class UserInfoView(viewsets.GenericViewSet):
 
     def logout(self, request):
         return Response()
+
+class UserAdminView(viewsets.GenericViewSet):
+    permission_classes = (IsAdmin,)
+
+    def getAllUsers(self, request):
+        users = User.objects.all()
+        users_serializer = userSerializer(users, many=True)
+        return Response(users_serializer.data)
+
+    def delete(self, request, uuid):
+        user = User.objects.get(uuid=uuid)
+        user.delete()
+        return Response({'data': 'User deleted successfully'})
 
 class ProfileView(viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)

@@ -56,8 +56,32 @@ export function useStations() {
     }, []);
 
     const useUpdateStation = useCallback((slug, data) => {
-        console.log(slug);
-        console.log(data);
+        let station_data = {
+            name: data.name,
+            status: data.status,
+            image: data.image,
+            latitude: data.latitude,
+            longitude: data.longitude
+        }
+
+        StationService.updateStation(slug, station_data)
+            .then(({ data, status }) => {
+                if (status === 200) {
+                    let old_stations = [...stations];
+                    const index = old_stations.findIndex(station => station.slug === slug);
+                    if (index !== -1) {
+                        old_stations[index] = data;
+                        setStations(old_stations);
+                    }
+                    toast.success('Station updated successfully');
+                    setIsCorrect(true);
+                    setTimeout(() => { setIsCorrect(false); }, 1000);
+                }
+            })
+            .catch(e => {
+                console.error(e);
+                toast.error('Create station error');
+            });
         setIsCorrect(true);
         setTimeout(() => { setIsCorrect(false); }, 1000);
     }, []);

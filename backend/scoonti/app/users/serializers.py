@@ -7,7 +7,7 @@ from scoonti.app.stations.models import Scooter
 class userSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('password', 'email', 'username', 'type')
+        fields = ( 'id', 'uuid', 'username', 'email', 'password', 'type')
 
     def register(context):
         username = context['username']

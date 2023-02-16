@@ -2,6 +2,10 @@ import api from './api';
 
 const AuthService = {
 
+    getAllUsers() {
+        return api().get('users');
+    },
+
     Register(data) {
         return api().post('register', { 'user': data });
     },
@@ -32,6 +36,10 @@ const AuthService = {
 
     getUserStats(id) {
         return api().get(`profile_stats/${id}`);
+    },
+
+    deleteUser(uuid) {
+        return api().delete(`user/${uuid}`);
     },
 }
 
