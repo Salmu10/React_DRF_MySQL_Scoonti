@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import './IncidenceSlotModal.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { useIncidents } from "../../hooks/useIncidents";
+import { useIncidents } from "../../../hooks/useIncidents";
+import { useNavigate } from "react-router-dom";
 Modal.setAppElement('#root');
 
 export default function IncidenceSlotModal ({ openModal, setOpenModal, slot_id }) {
+    const navigate = useNavigate();
+    const { isCorrect, useAddSlotIncidence } = useIncidents();
 
     const validators = Yup.object().shape({
         title: Yup.string().required('*Title is required').min(3, '*Title must be at least 3 characters').max(50, '*Title must be at most 50 characters'),
@@ -28,7 +31,7 @@ export default function IncidenceSlotModal ({ openModal, setOpenModal, slot_id }
     const onSubmit = data => {
         data.slot_id = slot_id;
         console.log(data);
-        // useCreateIncident(data);
+        useAddSlotIncidence(data);
     }
 
     const handleClose = () => {
@@ -36,6 +39,12 @@ export default function IncidenceSlotModal ({ openModal, setOpenModal, slot_id }
         setValue('title', '');
         setValue('desc', '');
     }
+
+    useEffect(() => {
+        if (isCorrect) {
+            navigate('/home');
+        }
+    }, [isCorrect, navigate]);
 
     return (
         <div className="modal">

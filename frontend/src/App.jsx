@@ -13,6 +13,7 @@ import { StationContextProvider } from './context/StationsContext';
 import { ScooterContextProvider } from './context/ScootersContext';
 import { SlotContextProvider } from './context/SlotsContext';
 import { AuthContextProvider } from './context/AuthContext';
+import { IncidentsContextProvider } from './context/IncidentsContext';
 
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -48,36 +49,38 @@ function App() {
             <StationContextProvider>
               <ScooterContextProvider>
                 <SlotContextProvider>
-                  <Header/>
-                  <ToastContainer 
-                    position="top-right" autoClose={2500} hideProgressBar={false} newestOnTop
-                    closeOnClick rtl={false} pauseOnFocusLoss={false} draggable pauseOnHover theme="dark"
-                  />
-                    <Routes>
-                      <Route path="/" element={<Rent/>} />
-                      <Route path="/home" element={<Home/>} />
-                      <Route path="/rent" element={<Rent/>} />
-                      <Route path="/login" element={<Login/>}/>
-                      <Route path="/register" element={<Register/>}/>
+                  <IncidentsContextProvider>
+                    <Header/>
+                    <ToastContainer 
+                      position="top-right" autoClose={2500} hideProgressBar={false} newestOnTop
+                      closeOnClick rtl={false} pauseOnFocusLoss={false} draggable pauseOnHover theme="dark"
+                    />
+                      <Routes>
+                        <Route path="/" element={<Rent/>} />
+                        <Route path="/home" element={<Home/>} />
+                        <Route path="/rent" element={<Rent/>} />
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/register" element={<Register/>}/>
 
-                      <Route element={<AdminGuard/>}>
-                        <Route path="/dashboard" element={<Dashboard/>}/>
-                        
-                        <Route path="/dashboard/stations" element={<StationsList/>}/>
-                        <Route path="/dashboard/stations/add" element={<StationsAdd/>}/>
-                        <Route path="/dashboard/stations/update/:slug" element={<StationsUpdate/>}/>
+                        <Route element={<AdminGuard/>}>
+                          <Route path="/dashboard" element={<Dashboard/>}/>
+                          
+                          <Route path="/dashboard/stations" element={<StationsList/>}/>
+                          <Route path="/dashboard/stations/add" element={<StationsAdd/>}/>
+                          <Route path="/dashboard/stations/update/:slug" element={<StationsUpdate/>}/>
 
-                        <Route path="/dashboard/scooters" element={<ScootersList/>}/>
-                        <Route path="/dashboard/scooters/add" element={<ScootersAdd/>}/>
-                        <Route path="/dashboard/scooters/update/:slug" element={<ScootersUpdate/>}/>
-                      </Route>
+                          <Route path="/dashboard/scooters" element={<ScootersList/>}/>
+                          <Route path="/dashboard/scooters/add" element={<ScootersAdd/>}/>
+                          <Route path="/dashboard/scooters/update/:slug" element={<ScootersUpdate/>}/>
+                        </Route>
 
-                      <Route element={<AuthGuard/>}>
-                        <Route path="/profile/:id" element={<Profile/>}/>
-                        <Route path="/stations/:slug" element={<StationDetails/>} />
-                      </Route>
-                    </Routes>
-                  <Footer/>
+                        <Route element={<AuthGuard/>}>
+                          <Route path="/profile/:id" element={<Profile/>}/>
+                          <Route path="/stations/:slug" element={<StationDetails/>} />
+                        </Route>
+                      </Routes>
+                    <Footer/>
+                  </IncidentsContextProvider>
                 </SlotContextProvider>
               </ScooterContextProvider>
             </StationContextProvider>
