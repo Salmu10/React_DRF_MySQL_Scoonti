@@ -29,7 +29,6 @@ export function useIncidents() {
             IncidentsService.createSlotIncidence(data)
                 .then(({ data, status }) => {
                     if (status === 200) {
-                        console.log(data);
                         setUserIncidents([...userIncidents, data]);
                         toast.success('Incidence sended, we will try to fix it. Thanks you!');
                         setIsCorrect(true);
@@ -40,5 +39,21 @@ export function useIncidents() {
         }
     }, []);
 
-    return { isCorrect, incidents, setIncidents, userIncidents, setUserIncidents, useAddSlotIncidence };  
+    const useAddScooterIncidence = useCallback((data) => {
+        if (isAuth) {
+            IncidentsService.createScooterIncidence(data)
+                .then(({ data, status }) => {
+                    if (status === 200) {
+                        console.log(data);
+                        // setUserIncidents([...userIncidents, data]);
+                        toast.success('Incidence sended, we will try to fix it. Thanks you!');
+                        // setIsCorrect(true);
+                        // setTimeout(() => { setIsCorrect(false); }, 1000);
+                    }
+                })
+                .catch(e => console.error(e));
+        }
+    }, []);
+
+    return { isCorrect, incidents, setIncidents, userIncidents, setUserIncidents, useAddSlotIncidence, useAddScooterIncidence };  
 }

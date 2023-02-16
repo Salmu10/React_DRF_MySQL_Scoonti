@@ -14,6 +14,10 @@ const IncidentsService = {
         return api().post("/slot_incidence", { 'slot_incidence': data });
     },
 
+    createScooterIncidence(data) {
+        return api().post("/scooter_incidence", { 'scooter_incidence': data });
+    },
+
     updateSlotIncidence(id) {
         return api().delete(`slot_incidence/${id}`);
     },

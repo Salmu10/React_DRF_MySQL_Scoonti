@@ -9,9 +9,9 @@ import { useIncidents } from "../../../hooks/useIncidents";
 import { useNavigate } from "react-router-dom";
 Modal.setAppElement('#root');
 
-export default function IncidenceSlotModal ({ openModal, setOpenModal, slot_id }) {
+export default function IncidenceSlotModal ({ openModal, setOpenModal, incidenceType, id }) {
     const navigate = useNavigate();
-    const { isCorrect, useAddSlotIncidence } = useIncidents();
+    const { isCorrect, useAddSlotIncidence, useAddScooterIncidence } = useIncidents();
 
     const validators = Yup.object().shape({
         title: Yup.string().required('*Title is required').min(3, '*Title must be at least 3 characters').max(50, '*Title must be at most 50 characters'),
@@ -29,9 +29,14 @@ export default function IncidenceSlotModal ({ openModal, setOpenModal, slot_id }
     };
 
     const onSubmit = data => {
-        data.slot_id = slot_id;
-        console.log(data);
-        useAddSlotIncidence(data);
+        if (incidenceType == 'slot') {
+            data.slot_id = id;
+            useAddSlotIncidence(data);
+        } else {
+            data.scooter_id = id;
+            useAddScooterIncidence(data);
+        }
+
     }
 
     const handleClose = () => {
@@ -53,7 +58,7 @@ export default function IncidenceSlotModal ({ openModal, setOpenModal, slot_id }
                     <button onClick={() => handleClose()}>
                         <FontAwesomeIcon className="cross_button" icon="fa-solid fa-square-xmark"/>
                     </button>
-                    <h1>Incidence on Slot {slot_id}</h1>
+                    <h1>Incidence on {incidenceType} {id}</h1>
                     <div className='attribute_box'>
                         <label htmlFor="title" className='etiqueta'>Title:</label>
                         <input type="text" id="title" {...register('title')} placeholder="Write the title there"/><br/>

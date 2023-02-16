@@ -8,7 +8,7 @@ class IncidenceSlotSerializer(serializers.ModelSerializer):
         model = IncidenceSlot
         fields = [ 'title', 'status', 'desc', 'user_id', 'slot_id']
 
-    def to_incident(instance):
+    def to_incidence_slot(instance):
         return ({
             "title": instance.title,
             "status": instance.status,
@@ -24,7 +24,6 @@ class IncidenceSlotSerializer(serializers.ModelSerializer):
         desc = context['desc']
 
         user = User.objects.get(username=username)
-
         if user is None:
             raise serializers.ValidationError('User not found')
 
@@ -38,28 +37,28 @@ class IncidenceSlotSerializer(serializers.ModelSerializer):
         if desc is None:
             raise serializers.ValidationError('Body is required')
 
-        incident = IncidenceSlot.objects.create(title=title, desc=desc, user_id=user.id, slot_id=slot.id)
+        incidence = IncidenceSlot.objects.create(title=title, desc=desc, user_id=user.id, slot_id=slot.id)
 
-        incident.save()
-        return incident
+        incidence.save()
+        return incidence
 
     def updateStatus(slug):
-        incident = IncidenceSlot.objects.get(slug=slug)
+        incidence = IncidenceSlot.objects.get(slug=slug)
 
-        if incident is None:
+        if incidence is None:
             raise serializers.ValidationError('Slot not found')
 
-        if (incident.status == 'pending'):
-            incident.status = 'in_progress'
-        elif (incident.status == 'in_progress'):
-            incident.status = 'in_revision'
-        elif (incident.status == 'in_revision'):
-            incident.status = 'resolved'
+        if (incidence.status == 'pending'):
+            incidence.status = 'in_progress'
+        elif (incidence.status == 'in_progress'):
+            incidence.status = 'in_revision'
+        elif (incidence.status == 'in_revision'):
+            incidence.status = 'resolved'
         else:
-            raise serializers.ValidationError('The incident is closed')
+            raise serializers.ValidationError('The incidence is closed')
 
-        incident.save()
-        return incident
+        incidence.save()
+        return incidence
 
     def getIncidentsUser(username):
         user = User.objects.get(username=username)
@@ -75,7 +74,7 @@ class IncidenceScooterSerializer(serializers.ModelSerializer):
         model = IncidenceScooter
         fields = [ 'title', 'status', 'desc', 'user_id', 'scooter_id']
 
-    def to_incident(instance):
+    def to_incidence_scooter(instance):
         return ({
             "title": instance.title,
             "status": instance.status,
@@ -91,7 +90,6 @@ class IncidenceScooterSerializer(serializers.ModelSerializer):
         desc = context['desc']
 
         user = User.objects.get(username=username)
-
         if user is None:
             raise serializers.ValidationError('User not found')
 
@@ -105,28 +103,28 @@ class IncidenceScooterSerializer(serializers.ModelSerializer):
         if desc is None:
             raise serializers.ValidationError('Body is required')
 
-        incident = IncidenceScooter.objects.create(title=title, desc=desc, user_id=user.id, scooter_id=scooter.id)
+        incidence = IncidenceScooter.objects.create(title=title, desc=desc, user_id=user.id, scooter_id=scooter.id)
 
-        incident.save()
-        return incident
+        incidence.save()
+        return incidence
 
     def updateStatus(slug):
-        incident = IncidenceScooter.objects.get(slug=slug)
+        incidence = IncidenceScooter.objects.get(slug=slug)
 
-        if incident is None:
+        if incidence is None:
             raise serializers.ValidationError('Scooter not found')
 
-        if (incident.status == 'pending'):
-            incident.status = 'in_progress'
-        elif (incident.status == 'in_progress'):
-            incident.status = 'in_revision'
-        elif (incident.status == 'in_revision'):
-            incident.status = 'resolved'
+        if (incidence.status == 'pending'):
+            incidence.status = 'in_progress'
+        elif (incidence.status == 'in_progress'):
+            incidence.status = 'in_revision'
+        elif (incidence.status == 'in_revision'):
+            incidence.status = 'resolved'
         else:
-            raise serializers.ValidationError('The incident is closed')
+            raise serializers.ValidationError('The incidence is closed')
 
-        incident.save()
-        return incident
+        incidence.save()
+        return incidence
 
     def getIncidentsUser(username):
         user = User.objects.get(username=username)

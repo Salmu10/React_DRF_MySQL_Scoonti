@@ -148,6 +148,8 @@
         }
     }
     .user_scooter {
+        display: block;
+        margin-bottom: 60px;
         .title {
             text-align: center;
             padding: 20px;
@@ -181,6 +183,21 @@
                     font-weight: bold;
                     font-size: 18px;
                     margin-top: -50px;
+                }
+                .report {
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 50px;
+                    p {
+                        margin: 0;
+                        margin-top: 10px;
+                        cursor: pointer;
+                        .icon {
+                            color: red;
+                            font-size: 20px;
+                            margin-right: 10px;
+                        }
+                    }
                 }
             }
         }

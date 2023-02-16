@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.permissions import (IsAuthenticated, AllowAny)
 from scoonti.app.core.permissions import IsAdmin
-from .models import IncidenceSlot
+from .models import IncidenceSlot, IncidenceScooter
 from .serializers import IncidenceSlotSerializer, IncidenceScooterSerializer, NotificationSerializer
 
 class IncidenceSlotView(viewsets.GenericViewSet):
@@ -22,12 +22,43 @@ class IncidenceSlotView(viewsets.GenericViewSet):
 
     def post(self, request):
         data = request.data['slot_incidence']
+        
         serializer_context = {
             'username': request.user,
             'slot_id': data['slot_id'],
             'title': data['title'],
             'desc': data['desc'],
         }
-        incident = IncidenceSlotSerializer.create(serializer_context)
-        return Response(IncidenceSlotSerializer.to_incident(incident))
+
+        incidence = IncidenceSlotSerializer.create(serializer_context)
+        return Response(IncidenceSlotSerializer.to_incidence_slot(incidence))
+
+
+class IncidenceScooterView(viewsets.GenericViewSet):
+
+    def get_permissions(self):
+        if self.request.method == 'POST':
+            self.permission_classes = [IsAuthenticated]
+        else:
+            self.permission_classes = [IsAdmin]
+        return super(IncidenceScooterView, self).get_permissions()
+
+    def getScootersIncidents(self, request):
+        incidents = IncidenceScooter.objects.all()
+        incidents_serializer = IncidenceScooterSerializer(incidents, many=True)
+        return Response(incidents_serializer.data)
+
+    def post(self, request):
+        data = request.data['scooter_incidence']
+
+        serializer_context = {
+            'username': request.user,
+            'scooter_id': data['scooter_id'],
+            'title': data['title'],
+            'desc': data['desc'],
+        }
+
+        incidence = IncidenceScooterSerializer.create(serializer_context)
+        return Response(IncidenceScooterSerializer.to_incidence_scooter(incidence))
+
 

@@ -5,11 +5,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useAuth } from "../../../hooks/useAuth";
 import { useParams } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import IncidenceSlotModal from "../Incidents/IncidenceSlotModal";
 
 const ProfileForm = ({user, profile, sendData, errorMSG}) => {
     const { id } = useParams();
     const [edit, setEdit] = useState(true);
     const { useUserScooter, userScooter, error_scooterMSG, stats, useUserStats } = useAuth();
+    const [openModal, setOpenModal] = useState(false);
+    const [modalScooter, setModalScooter] = useState(null);
+
+    const incidence_type = 'scooter';
 
     const validators = Yup.object().shape({
         username: Yup.string().required('*Username is required').min(3, '*Username must be between 3 and 15 characters').max(15, '*Username must be between 3 and 15 characters'),
@@ -45,6 +51,13 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
     const isScooter = error_scooterMSG == '' ? false : true;
 
     // console.log(isScooter);
+
+    const report = scooter_id => {
+        console.log(scooter_id);
+        setOpenModal(true);
+        setModalScooter(scooter_id);
+    }
+
 
     return (
         <div className='profile_page'>
@@ -109,6 +122,13 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
                         <div className="card_title title-black">
                             <p>{userScooter.name}</p>
                         </div>
+                        <div className="report">
+                            <p className="report_button" onClick={() => report(userScooter.id)}>
+                                <FontAwesomeIcon className='icon' icon="fa-solid fa-circle-exclamation" />
+                                Report an incidence
+                            </p>
+                        </div>
+                        <IncidenceSlotModal openModal={openModal} setOpenModal={setOpenModal} incidenceType={incidence_type} id={modalScooter} />
                     </div>
                 </div>
             </div>

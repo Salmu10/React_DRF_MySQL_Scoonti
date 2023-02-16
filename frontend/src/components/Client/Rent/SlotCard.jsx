@@ -13,6 +13,8 @@ export default function SlotCard ({ slot }) {
     const [openModal, setOpenModal] = useState(false);
     const [modalSlot, setModalSlot] = useState(null);
 
+    const incidence_type = 'slot';
+
     const img_background = slot.status === 'in_use' ? '#27EE27' : slot.status === 'vacant' ? '#FF1818' : '#FFFF37';
     const slot_status = slot.status === 'in_use' ? 'Scooter available' : slot.status === 'vacant' ? 'Vacant' : 'Maintenance';
 
@@ -35,7 +37,6 @@ export default function SlotCard ({ slot }) {
     }, [isCorrect, navigate]);
 
     const report = slot_id => {
-        // console.log(slot_id);
         setOpenModal(true);
         setModalSlot(slot_id);
     }
@@ -57,7 +58,7 @@ export default function SlotCard ({ slot }) {
                     Report an incidence
                 </p>
             </div>
-            <IncidenceSlotModal openModal={openModal} setOpenModal={setOpenModal} slot_id={modalSlot} />
+            <IncidenceSlotModal openModal={openModal} setOpenModal={setOpenModal} incidenceType={incidence_type} id={modalSlot}/>
         </div>
     )
 }
