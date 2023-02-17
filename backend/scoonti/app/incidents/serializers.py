@@ -6,10 +6,11 @@ from scoonti.app.stations.models import Slot, Scooter
 class IncidenceSlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncidenceSlot
-        fields = [ 'title', 'status', 'desc', 'user_id', 'slot_id']
+        fields = [ 'id', 'title', 'status', 'desc', 'user_id', 'slot_id']
 
     def to_incidence_slot(instance):
         return ({
+            "id": instance.id,
             "title": instance.title,
             "status": instance.status,
             "desc": instance.desc,
@@ -72,10 +73,11 @@ class IncidenceSlotSerializer(serializers.ModelSerializer):
 class IncidenceScooterSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncidenceScooter
-        fields = [ 'title', 'status', 'desc', 'user_id', 'scooter_id']
+        fields = [ 'id', 'title', 'status', 'desc', 'user_id', 'scooter_id']
 
     def to_incidence_scooter(instance):
         return ({
+            "id": instance.id,
             "title": instance.title,
             "status": instance.status,
             "desc": instance.desc,

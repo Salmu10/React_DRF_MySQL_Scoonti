@@ -60,6 +60,29 @@ class IncidenceScooterView(viewsets.GenericViewSet):
         incidence = IncidenceScooterSerializer.create(serializer_context)
         return Response(IncidenceScooterSerializer.to_incidence_scooter(incidence))
 
+class IncidentsView(viewsets.GenericViewSet):
+    permission_classes = [IsAdmin]
+
+    def getAllIncidentsSlots(self, request):
+        incidents_slots = IncidenceSlot.objects.all()
+        incidents_slots_serializer = IncidenceSlotSerializer(incidents_slots, many=True)
+        return Response(incidents_slots_serializer.data)
+
+    def getAllIncidentsScooters(self, request):
+        incidents_scooters = IncidenceScooter.objects.all()
+        incidents_scooters_serializer = IncidenceScooterSerializer(incidents_scooters, many=True)
+        return Response(incidents_scooters_serializer.data)
+
+    def deleteIncidenceSlot(self, request, id):
+        incidence_slot = IncidenceSlot.objects.get(id=id)
+        incidence_slot.delete()
+        return Response({'data': 'Incidence deleted successfully'})
+
+    def deleteIncidenceScooter(self, request, id):
+        incidence_scooter = IncidenceScooter.objects.get(id=id)
+        incidence_scooter.delete()
+        return Response({'data': 'Incidence deleted successfully'})
+
 class NotificationsView(viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
 

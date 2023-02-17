@@ -16,12 +16,16 @@
             margin-top: -20px;
             margin-bottom: 40px;
         }
-        .cross_button {
-            position: relative;
-            color: red;
-            font-size: 30px;
-            float: right;
-            padding: 15px;
+        .modal_button {
+            background-color: transparent;
+            border: none;
+            .cross_button {
+                position: relative;
+                color: red;
+                font-size: 30px;
+                float: right;
+                padding: 15px;
+            }
         }
         .attribute_box {
             display: block;

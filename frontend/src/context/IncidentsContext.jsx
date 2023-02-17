@@ -6,18 +6,28 @@ const Context = React.createContext({})
 
 export function IncidentsContextProvider({ children }) {
     const { isAdmin } = useContext(AuthContext);
-    const [incidents, setIncidents] = useState([]);
+    const [incidentsSlots, setIncidentsSlots] = useState([]);
+    const [incidentsScooters, setIncidentsScooters] = useState([]);
 
     useEffect(function () {
         if (isAdmin) {
-            IncidentsService.getAllIncidents()
+            IncidentsService.getAllIncidentsSlots()
                 .then(({ data }) => {
-                    setIncidents(data)
+                    setIncidentsSlots(data);
                 })
         }
-    }, [setIncidents, isAdmin])
+    }, [setIncidentsSlots, isAdmin])
 
-    return <Context.Provider value={{ incidents, setIncidents }}>
+    useEffect(function () {
+        if (isAdmin) {
+            IncidentsService.getAllIncidentsScooters()
+                .then(({ data }) => {
+                    setIncidentsScooters(data);
+                })
+        }
+    }, [setIncidentsScooters, isAdmin])
+
+    return <Context.Provider value={{ incidentsSlots, setIncidentsSlots, incidentsScooters, setIncidentsScooters }}>
         {children}
     </Context.Provider>
 }

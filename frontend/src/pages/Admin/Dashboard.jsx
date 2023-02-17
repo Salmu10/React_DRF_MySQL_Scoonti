@@ -11,7 +11,7 @@ const Dashboard = () => {
         scooters: () => navigate('/dashboard/scooters'),
         users: () => navigate('/dashboard/users'),
         rents: () => navigate('/dashboard/rents'),
-        icidents: () => navigate('/dashboard/icidents'),
+        icidents: () => navigate('/dashboard/incidents'),
     }
     
     return (

@@ -16,6 +16,7 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
     const [modalScooter, setModalScooter] = useState(null);
 
     const incidence_type = 'scooter';
+    const isScooter = error_scooterMSG == '' ? false : true;
 
     const validators = Yup.object().shape({
         username: Yup.string().required('*Username is required').min(3, '*Username must be between 3 and 15 characters').max(15, '*Username must be between 3 and 15 characters'),
@@ -48,16 +49,10 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
         sendData(data);
     };
 
-    const isScooter = error_scooterMSG == '' ? false : true;
-
-    // console.log(isScooter);
-
     const report = scooter_id => {
-        console.log(scooter_id);
         setOpenModal(true);
         setModalScooter(scooter_id);
     }
-
 
     return (
         <div className='profile_page'>

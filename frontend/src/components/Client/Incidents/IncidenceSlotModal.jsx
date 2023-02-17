@@ -55,7 +55,7 @@ export default function IncidenceSlotModal ({ openModal, setOpenModal, incidence
         <div className="modal">
             <Modal className="incidenceSlotModal" isOpen={openModal} onRequestClose={() => handleClose()} style={customStyles}>
                 <form className='incidence_slot_form' onSubmit={handleSubmit(onSubmit)}>
-                    <button onClick={() => handleClose()}>
+                    <button className="modal_button" onClick={() => handleClose()}>
                         <FontAwesomeIcon className="cross_button" icon="fa-solid fa-square-xmark"/>
                     </button>
                     <h1>Incidence on {incidenceType} {id}</h1>

@@ -14,7 +14,7 @@ export function NotificationsContextProvider({ children }) {
         if (isAuth) {
             NotificationsService.getAllNotifications()
                 .then(({ data }) => {
-                    console.log(data);
+                    // console.log(data);
                     setNotifications(data);
                 })
         }

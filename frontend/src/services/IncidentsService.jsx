@@ -2,8 +2,12 @@ import api from "./api"
 
 const IncidentsService = {
 
-    getAllIncidents() {
-        return api().get("/slot_incidents");
+    getAllIncidentsSlots() {
+        return api().get("/slots_incidents");
+    },
+
+    getAllIncidentsScooters() {
+        return api().get("/scooters_incidents");
     },
 
     getIncidentsUser() {
@@ -24,6 +28,10 @@ const IncidentsService = {
 
     deleteSlotIncidence(id) {
         return api().delete(`slot_incidence/${id}`);
+    },
+
+    deleteScooterIncidence(id) {
+        return api().delete(`scooter_incidence/${id}`);
     },
     
 };
