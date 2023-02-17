@@ -10,19 +10,6 @@ export function useIncidents() {
     const { incidentsSlots, setIncidentsSlots, incidentsScooters, setIncidentsScooters } = useContext(IncidentsContext);
     const [userIncidents, setUserIncidents] = useState([]);
     const [isCorrect, setIsCorrect] = useState(false);
-    
-    useEffect(() => {
-        if (isAuth) {
-            // IncidentsService.getIncidentsUser()
-            //     .then(({ data, status }) => {
-            //         if (status === 200) {
-            //             console.log(data);
-            //             setUserIncidents(data);
-            //         }
-            //     })
-            //     .catch(e => console.error(e));
-        }
-    }, []);
 
     const useAddSlotIncidence = useCallback((data) => {
         if (isAuth) {
