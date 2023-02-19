@@ -5,6 +5,8 @@ urlpatterns = [
     # INCIDENTS
     path('slots_incidents', IncidentsView.as_view({"get": "getAllIncidentsSlots"})),
     path('scooters_incidents', IncidentsView.as_view({"get": "getAllIncidentsScooters"})),
+    path('slot_incidence/<str:id>', IncidentsView.as_view({"put": "updateIncidenceSlot"})),
+    path('scooter_incidence/<str:id>', IncidentsView.as_view({"put": "updateIncidenceScooter"})),
     path('slot_incidence/<str:id>', IncidentsView.as_view({"delete": "deleteIncidenceSlot"})),
     path('scooter_incidence/<str:id>', IncidentsView.as_view({"delete": "deleteIncidenceScooter"})),
 

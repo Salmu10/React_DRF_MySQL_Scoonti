@@ -73,6 +73,16 @@ class IncidentsView(viewsets.GenericViewSet):
         incidents_scooters_serializer = IncidenceScooterSerializer(incidents_scooters, many=True)
         return Response(incidents_scooters_serializer.data)
 
+    def updateIncidenceSlot(self, request, id):
+        context = request.data
+        incidence = IncidenceSlotSerializer.updateStatus(id, context)
+        return Response(IncidenceSlotSerializer.to_incidence_slot(incidence))
+
+    def updateIncidenceScooter(self, request, id):
+        context = request.data
+        incidence = IncidenceScooterSerializer.updateStatus(id, context)
+        return Response(IncidenceScooterSerializer.to_incidence_scooter(incidence))
+
     def deleteIncidenceSlot(self, request, id):
         incidence_slot = IncidenceSlot.objects.get(id=id)
         incidence_slot.delete()

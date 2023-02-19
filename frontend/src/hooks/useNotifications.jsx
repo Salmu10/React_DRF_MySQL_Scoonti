@@ -4,7 +4,7 @@ import NotificationsContext from "../context/NotificationsContext";
 import NotificationsService from "../services/NotificationsService";
 
 export function useNotifications() {
-    const { notifications, setNotifications } = useContext(NotificationsContext);
+    const { notifications, setNotifications, notificationsNumber, setNotificationsNumber } = useContext(NotificationsContext);
 
     const useSeeNotification = useCallback((id) => {
         NotificationsService.updateNotificationStatus(id);
@@ -17,5 +17,5 @@ export function useNotifications() {
             // .catch(e => console.error(e))
     }, []);
 
-    return { notifications, setNotifications, useSeeNotification }
+    return { notifications, setNotifications, notificationsNumber, setNotificationsNumber, useSeeNotification }
 }

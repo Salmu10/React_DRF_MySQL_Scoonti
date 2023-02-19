@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
-                ('status', models.CharField(default='pendiente', max_length=100)),
+                ('status', models.CharField(default='pending', max_length=100)),
                 ('desc', models.CharField(max_length=300)),
                 ('slot', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='slot_affected', to='stations.slot')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_incident', to=settings.AUTH_USER_MODEL)),
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
-                ('status', models.CharField(default='pendiente', max_length=100)),
+                ('status', models.CharField(default='pending', max_length=100)),
                 ('desc', models.CharField(max_length=300)),
                 ('scooter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='scooter_affected', to='stations.scooter')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='incident_user', to=settings.AUTH_USER_MODEL)),

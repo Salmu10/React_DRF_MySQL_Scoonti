@@ -7,7 +7,8 @@ import './App.scss';
 // fontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-library.add(fas);
+import { far } from '@fortawesome/free-regular-svg-icons';
+library.add(fas, far);
 
 import { StationContextProvider } from './context/StationsContext';
 import { ScooterContextProvider } from './context/ScootersContext';

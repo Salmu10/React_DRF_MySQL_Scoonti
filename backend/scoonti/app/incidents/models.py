@@ -5,7 +5,7 @@ from scoonti.app.stations.models import Slot, Scooter
 class IncidenceSlot(models.Model):
 
     title = models.CharField(max_length=30)
-    status = models.CharField(max_length=100, default='pendiente')
+    status = models.CharField(max_length=100, default='pending')
     desc = models.CharField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_incident")
     slot = models.ForeignKey(Slot, on_delete=models.CASCADE, related_name="slot_affected")
@@ -16,7 +16,7 @@ class IncidenceSlot(models.Model):
 class IncidenceScooter(models.Model):
 
     title = models.CharField(max_length=30)
-    status = models.CharField(max_length=100, default='pendiente')
+    status = models.CharField(max_length=100, default='pending')
     desc = models.CharField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="incident_user")
     scooter = models.ForeignKey(Scooter, on_delete=models.CASCADE, related_name="scooter_affected")

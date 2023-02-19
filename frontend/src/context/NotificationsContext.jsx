@@ -9,18 +9,19 @@ export function NotificationsContextProvider({ children }) {
     const { isAuth } = useContext(AuthContext);
     const { incidents } = useContext(IncidentsContext);
     const [notifications, setNotifications] = useState([]);
+    const [notificationsNumber, setNotificationsNumber] = useState(0);
 
     useEffect(function () {
         if (isAuth) {
             NotificationsService.getAllNotifications()
                 .then(({ data }) => {
-                    // console.log(data);
                     setNotifications(data);
+                    setNotificationsNumber(data.length);
                 })
         }
     }, [setNotifications, isAuth, incidents])
 
-    return <Context.Provider value={{ notifications, setNotifications }}>
+    return <Context.Provider value={{ notifications, setNotifications, notificationsNumber, setNotificationsNumber }}>
         {children}
     </Context.Provider>
 }

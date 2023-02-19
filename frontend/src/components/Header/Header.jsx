@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import './Header.scss';
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { useAuth } from "../../hooks/useAuth";
+import { useNotifications } from "../../hooks/useNotifications";
 
 export default function Header () {
     const navigate = useNavigate();
     const { user, isAuth, isAdmin, logout } = useContext(AuthContext);
-    // const { useLogout } = useAuth();
+    const { notificationsNumber } = useNotifications();
 
     const redirects = {
         home: () => navigate('/home'),
@@ -22,7 +22,7 @@ export default function Header () {
     const isUser = isAuth ? <li className="link" onClick={() => logout()}>Log out</li>
     : <li className="link" onClick={() => redirects.register()}>Sign up</li>;
 
-    const isUsername = isAuth ? <li className="link" onClick={() => redirects.profile(user.id)}>{user.username}</li>
+    const isUsername = isAuth ? <li className="link position-relative" onClick={() => redirects.profile(user.id)}>{user.username}<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{notificationsNumber}</span></li>
     : <li className="link" onClick={() => redirects.login()}>Sign in</li>;
 
     const isAdminUser = isAdmin ? <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a> : '';
@@ -40,9 +40,6 @@ export default function Header () {
                         {isAdminUser}
                         {isUsername}
                         {isUser}
-                        {/* <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a> */}
-                        {/* <a className="link" onClick={() => redirects.login()}>Login</a> */}
-                        {/* <a className="link" onClick={() => redirects.register()}>Register</a> */}
                     </ul>
                 </nav>
             </div>

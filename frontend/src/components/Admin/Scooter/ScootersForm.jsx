@@ -46,7 +46,7 @@ const ScootersForm = ({scooter= {slug: '', name: '', status: ''}, form_type, sen
                 <select id='status' name="status" {...register('status')} defaultValue="">
                     <option value="" disabled>Select</option>
                     <option value="in_use">In use</option>
-                    <option value="unused">Unused</option>
+                    <option value="vacant">Vacant</option>
                     <option value="maintenance">Maintenance</option>
                 </select><br/>
                 <span className="error">{errors.status?.message}</span>

@@ -16,7 +16,7 @@ const Notification = ({ notification, seeNotification }) => {
                         <div className="mouth happy"></div>
                     </div>
                     <div className="shadow scale"></div>
-                    <div className="message"><h1 className="alert">New Notification</h1><p>{notification.body}</p></div>
+                    <div className="message"><h1 className="alert">New Notification</h1><p>{notification.desc}</p></div>
                 </div>
             </div>
         </div>
