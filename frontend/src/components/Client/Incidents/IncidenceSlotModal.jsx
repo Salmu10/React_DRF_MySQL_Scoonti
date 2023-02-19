@@ -14,7 +14,7 @@ export default function IncidenceSlotModal ({ openModal, setOpenModal, incidence
     const { isCorrect, useAddSlotIncidence, useAddScooterIncidence } = useIncidents();
 
     const validators = Yup.object().shape({
-        title: Yup.string().required('*Title is required').min(3, '*Title must be at least 3 characters').max(50, '*Title must be at most 50 characters'),
+        title: Yup.string().required('*Title is required').min(3, '*Title must be at least 3 characters').max(25, '*Title must be at most 25 characters'),
         desc: Yup.string().required('*Description is required').min(3, '*Description must be at least 3 characters').max(300, '*Description must be at most 300 characters'),
     });
 

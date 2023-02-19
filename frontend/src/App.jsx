@@ -45,7 +45,6 @@ const RentsList = React.lazy(() => import('./pages/Admin/Rent/RentsList'));
 const IncidentsList = React.lazy(() => import('./pages/Admin/Incidence/IncidentsList'));
 
 const Profile = React.lazy(() => import('./pages/Client/Profile'));
-const NotificationsUser = React.lazy(() => import('./pages/Client/NotificationsUser'));
 
 function App() {
   return (
@@ -89,7 +88,6 @@ function App() {
                           <Route element={<AuthGuard/>}>
                             <Route path="/profile/:id" element={<Profile/>}/>
                             <Route path="/stations/:slug" element={<StationDetails/>}/>
-                            <Route path="/notifications" element={<NotificationsUser/>} />
                           </Route>
                         </Routes>
                       <Footer/>

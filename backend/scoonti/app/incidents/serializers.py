@@ -57,10 +57,10 @@ class IncidenceSlotSerializer(serializers.ModelSerializer):
             incidence.status = 'pending'
         elif (new_status == 'in_progress'):
             incidence.status = 'in_progress'
-            Notification.objects.create(desc="The slot incidence: " + str(incidence.id) + " is in progress.", user_id=incidence.user_id, seen=False)
+            Notification.objects.create(desc="Your slot incidence: " + str(incidence.title) + ", is in progress.", user_id=incidence.user_id, seen=False)
         elif (new_status == 'resolved'):
             incidence.status = 'resolved'
-            Notification.objects.create(desc="The slot incidence: " + str(incidence.id) + " is resolved.", user_id=incidence.user_id, seen=False)
+            Notification.objects.create(desc="Your slot incidence: " + str(incidence.title) + ", is resolved. Thank you!", user_id=incidence.user_id, seen=False)
         else:
             raise serializers.ValidationError('The incidence is closed')
 
@@ -130,10 +130,10 @@ class IncidenceScooterSerializer(serializers.ModelSerializer):
             incidence.status = 'pending'
         elif (new_status == 'in_progress'):
             incidence.status = 'in_progress'
-            Notification.objects.create(desc="The scooter incidence: " + str(incidence.id) + " is in progress.", user_id=incidence.user_id, seen=False)
+            Notification.objects.create(desc="Your scooter incidence: " + str(incidence.title) + ", is in progress.", user_id=incidence.user_id, seen=False)
         elif (new_status == 'resolved'):
             incidence.status = 'resolved'
-            Notification.objects.create(desc="The scooter incidence: " + str(incidence.id) + " is resolved.", user_id=incidence.user_id, seen=False)
+            Notification.objects.create(desc="Your scooter incidence: " + str(incidence.title) + ", is resolved. Thank you!", user_id=incidence.user_id, seen=False)
         else:
             raise serializers.ValidationError('The incidence is closed')
 

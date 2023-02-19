@@ -4,9 +4,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { useAuth } from "../../../hooks/useAuth";
+import { useNotifications } from "../../../hooks/useNotifications";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IncidenceSlotModal from "../Incidents/IncidenceSlotModal";
+import Notification from "../Notifications/Notification";
 
 const ProfileForm = ({user, profile, sendData, errorMSG}) => {
     const { id } = useParams();
@@ -14,6 +16,7 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
     const { useUserScooter, userScooter, error_scooterMSG, stats, useUserStats } = useAuth();
     const [openModal, setOpenModal] = useState(false);
     const [modalScooter, setModalScooter] = useState(null);
+    const { notifications, useSeeNotification } = useNotifications();
 
     const incidence_type = 'scooter';
     const isScooter = error_scooterMSG == '' ? false : true;
@@ -53,6 +56,11 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
         setOpenModal(true);
         setModalScooter(scooter_id);
     }
+
+
+    const notifications_html = notifications.length > 0 ?
+        notifications.map(item => <Notification notification={item} key={item.id} seeNotification={useSeeNotification} />)
+        : <p>No Notifications</p>;
 
     return (
         <div className='profile_page'>
@@ -104,6 +112,9 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
                     </div>
                 </div>
             </form>
+
+            {notifications_html}
+
             <div className='user_scooter'>
                 <div className="title">
                     <h3>Scooter rented</h3>

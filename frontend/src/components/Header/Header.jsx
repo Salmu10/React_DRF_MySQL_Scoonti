@@ -16,7 +16,6 @@ export default function Header () {
         login: () => navigate('/login'),
         register: () => navigate('/register'),
         profile: (id) => navigate('/profile/' + id),
-        notifications: () => navigate('/notifications'),
     }
 
     const isUser = isAuth ? <li className="link" onClick={() => logout()}>Log out</li>
