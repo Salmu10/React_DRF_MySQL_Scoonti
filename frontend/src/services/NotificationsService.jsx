@@ -8,8 +8,8 @@ const NotificationsService = {
     },
 
     updateNotificationStatus(id) {
-        // return api().delete(`notification/${id}`);
-        console.log(id);
+        return api().put(`notifications/${id}`);
+        // console.log(id);
     }
     
 };

@@ -59,7 +59,7 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
 
 
     const notifications_html = notifications.length > 0 ?
-        notifications.map(item => <Notification notification={item} key={item.id} seeNotification={useSeeNotification} />)
+        notifications.map(item => <Notification notification={item} key={item.id}/>)
         : <p>No Notifications</p>;
 
     return (

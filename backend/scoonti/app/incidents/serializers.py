@@ -36,7 +36,7 @@ class IncidenceSlotSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Title is required')
 
         if desc is None:
-            raise serializers.ValidationError('Body is required')
+            raise serializers.ValidationError('Description is required')
 
         incidence = IncidenceSlot.objects.create(title=title, desc=desc, user_id=user.id, slot_id=slot.id)
 
@@ -109,7 +109,7 @@ class IncidenceScooterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError('Title is required')
 
         if desc is None:
-            raise serializers.ValidationError('Body is required')
+            raise serializers.ValidationError('Description is required')
 
         incidence = IncidenceScooter.objects.create(title=title, desc=desc, user_id=user.id, scooter_id=scooter.id)
 
@@ -160,7 +160,7 @@ class NotificationSerializer(serializers.ModelSerializer):
     def to_notification(instance):
         return ({
             "id": instance.id,
-            "desc": instance.body,
+            "desc": instance.desc,
             "seen": instance.seen
         })
 
@@ -176,8 +176,8 @@ class NotificationSerializer(serializers.ModelSerializer):
     def seeNotification(context):
         notification_id = context['id']
         username = context['username']
-        user = User.objects.get(username=username)
 
+        user = User.objects.get(username=username)
         if user is None:
             raise serializers.ValidationError('User is not found')
 
