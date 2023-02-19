@@ -1,12 +1,12 @@
 header {
     width: 100%;
     background-color: #008f88;
-    // padding: 0.2em 0;
-    height: 13vh;
+    padding: 0.2em 0;
+    // height: 13vh;
     .header-container {
         display: grid;
         gap: 10px;
-        grid-template-columns: 0.8fr 1fr 1.2fr;
+        grid-template-columns: 1.5fr 0.5fr 1.2fr;
         margin-right: 20px;
         align-items: center;
     }
@@ -16,7 +16,7 @@ header {
         text-align: left;
         margin-left: 15%;
         img {
-            width: 75%;
+            width: 200px;
             text-align: center;
             margin: auto;
         }

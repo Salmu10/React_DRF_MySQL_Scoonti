@@ -18,10 +18,12 @@ export default function Header () {
         profile: (id) => navigate('/profile/' + id),
     }
 
+    const badge = notificationsNumber  == 0 ? true : false;
+
     const isUser = isAuth ? <li className="link" onClick={() => logout()}>Log out</li>
     : <li className="link" onClick={() => redirects.register()}>Sign up</li>;
 
-    const isUsername = isAuth ? <li className="link position-relative" onClick={() => redirects.profile(user.id)}>{user.username}<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{notificationsNumber}</span></li>
+    const isUsername = isAuth ? <li className="link position-relative" onClick={() => redirects.profile(user.id)}>{user.username}<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" hidden={badge}>{notificationsNumber}</span></li>
     : <li className="link" onClick={() => redirects.login()}>Sign in</li>;
 
     const isAdminUser = isAdmin ? <a className="link" onClick={() => redirects.dashboard()}>Dashboard</a> : '';

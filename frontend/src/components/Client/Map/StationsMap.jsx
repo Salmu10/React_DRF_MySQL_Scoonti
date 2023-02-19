@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import Map, { GeolocateControl, Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import "./StationsMap.scss"
+import "./StationsMap.scss";
+import { useNavigate } from "react-router-dom";
 
 export default function StationsMap({ stations = [], setShow }) {
     const [markerIndex, setMarkerIndex] = useState(null);
+    const navigate = useNavigate();
 
-    const button_click = id => {
-        // console.log(id);
-        // console.log(markerIndex);
+    const redirects = {
+        details: (slug) => navigate('/stations/' + slug),
     }
 
     return (
@@ -26,7 +27,7 @@ export default function StationsMap({ stations = [], setShow }) {
 
                 {stations.map((station, id) => (
                     <Marker key={id} latitude={station.latitude} longitude={station.longitude} color={"#008f88"}>
-                        <button className="marker_button" onClick={() => { setMarkerIndex(id); button_click(id); setShow(stations[id].id)}}>
+                        <button className="marker_button" onClick={() => { setMarkerIndex(id); setShow(stations[id].id)}}>
                             <div style={{ backgroundColor: 'transparent', width: 25, height: 50, borderRadius: '50%' }}/>
                         </button>
                     </Marker>                
@@ -35,8 +36,15 @@ export default function StationsMap({ stations = [], setShow }) {
                 {markerIndex !== null && (
                     <Popup latitude={stations[markerIndex].latitude} longitude={stations[markerIndex].longitude} closeButton={true} closeOnClick={false} 
                         onClose={() => { setMarkerIndex(null); setShow(null) }} anchor="top">
-                        <div className="text-black">
-                            {stations[markerIndex].slug}
+                        <div className="popup" onClick={() => { redirects.details(stations[markerIndex].slug) }}>
+                            <div className='popup_name'>
+                                <h5>{stations[markerIndex].name}</h5>
+                            </div>
+                            <div className='popup_image'>
+                                <img src="/assets/estacion.jpeg" alt='img'/> 
+                            </div>
+                            {/* {stations[markerIndex].slug} */}
+
                         </div>
                     </Popup>
                 )}
