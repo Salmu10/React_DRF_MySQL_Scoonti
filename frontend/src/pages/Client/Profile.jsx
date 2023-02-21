@@ -19,7 +19,7 @@ const Profile = () => {
     return (
         <div className="profile_container">
             <div className="title">
-                <h2>Profile</h2>
+                <h1>Profile</h1>
             </div>
             <ProfileForm user={user} profile={profile} sendData={(data) => useUpdateProfile(id, data)} errorMSG={errorMSG}/>
         </div>

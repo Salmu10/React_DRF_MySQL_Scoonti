@@ -2,22 +2,16 @@
     display: block;
     width: 100%;
     text-align: center;
-    min-height: 77vh;
     box-sizing: none;
     .ring {
         display: block;
         margin: auto;
         position: relative;
-        margin-top: 10%;
-        width: 150px;
-        height: 150px;
         background: transparent;
         border: 3px solid #3c3c3c;
         border-radius: 50%;
         text-align: center;
-        line-height: 150px;
         font-family: sans-serif;
-        font-size: 20px;
         color: #008f88;
         letter-spacing: 4px;
         text-transform: uppercase;
@@ -60,6 +54,51 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 576px) {
+
+    .spinner {
+        min-height: 79vh;
+        .ring {
+            margin-top: 10%;
+            width: 120px;
+            height: 120px;
+            font-size: 13px;
+            line-height: 120px;
+        }
+    }
+
+}
+
+@media screen and (min-width: 577px) {
+
+    .spinner {
+        min-height: 77vh;
+        .ring {
+            margin-top: 10%;
+            width: 135px;
+            height: 135px;
+            font-size: 16px;
+            line-height: 135px;
+        }
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+
+    .spinner {
+        min-height: 76vh;
+        .ring {
+            margin-top: 3%;
+            width: 150px;
+            height: 150px;
+            font-size: 20px;
+            line-height: 150px;
+        }
+    }
+
 }
 
 @keyframes animateC {

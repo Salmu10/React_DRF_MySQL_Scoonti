@@ -1,5 +1,4 @@
 import React from 'react';
-
 import StationCard from './StationCard';
 
 export default function StationsList ({ stations }) {

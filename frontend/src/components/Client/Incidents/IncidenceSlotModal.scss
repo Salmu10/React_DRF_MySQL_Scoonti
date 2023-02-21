@@ -1,11 +1,13 @@
 .incidenceSlotModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 50%;
         margin: auto;
-        margin-top: 10%;
         background: #fff;
         border: 2px solid #008f88;
         border-radius: 10px;
@@ -15,6 +17,7 @@
             text-transform: uppercase;
             margin-top: -20px;
             margin-bottom: 40px;
+            padding: 20px;
         }
         .modal_button {
             background-color: transparent;
@@ -29,33 +32,29 @@
         }
         .attribute_box {
             display: block;
-            width: 60%;
+            width: 90%;
             text-align: center;
             padding: 15px;
             margin: auto;
             .etiqueta {
-                display: block;
-                float: left;
+                display: inline-block;
+                vertical-align: top;
+                width: 110px;
                 font-weight: bold;
                 text-transform: uppercase;
+                padding-bottom: 10px;
             }
             input {
-                display: block;
-                float: right;
-                margin-left: 30px;
                 border: 1px solid #008f88;
                 padding-left: 5px;
                 padding-right: 5px;
-                width: 300px;
+                margin-left: 10px;
             }
             textarea {
-                display: block;
-                float: right;
                 margin-left: 10px;
                 border: 1px solid #008f88;
                 padding-left: 5px;
                 padding-right: 5px;
-                width: 300px;
                 background-color: transparent;
                 resize: none;
                 &::placeholder {
@@ -66,7 +65,7 @@
             }
             .error {
                 display: block;
-                text-align: left;
+                text-align: center;
                 color: red;
                 font-style: italic;
                 padding-top: 10px;
@@ -87,4 +86,53 @@
         }
     }
 
+}
+
+@media screen and (max-width: 576px) {
+    .incidenceSlotModal {
+        form {
+            width: 80%;
+            .attribute_box {
+                input {
+                    width: 240px;
+                }
+                textarea {
+                    width: 240px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 577px) {
+
+    .incidenceSlotModal {
+        form {
+            width: 70%;
+            .attribute_box {
+                input {
+                    width: 280px;
+                }
+                textarea {
+                    width: 280px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .incidenceSlotModal {
+        form {
+            width: 60%;
+            .attribute_box {
+                input {
+                    width: 300px;
+                }
+                textarea {
+                    width: 300px;
+                }
+            }
+        }
+    }
 }

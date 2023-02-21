@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Map, { GeolocateControl, Marker, Popup } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import "./StationsMap.scss"
+import "./StationsMap.scss";
 
 export default function StationMap({ station = [] }) {
 

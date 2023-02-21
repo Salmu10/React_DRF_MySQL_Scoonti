@@ -7,7 +7,7 @@ export default function SlotsList ({ station, slots }) {
     return  (
         <div className="slots_container">
             <div className="title">
-                <h2>Rent a Scooter</h2>
+                <h1>Rent a Scooter</h1>
                 <h3>{station.name}</h3>
             </div>
             <div className='leyenda'>

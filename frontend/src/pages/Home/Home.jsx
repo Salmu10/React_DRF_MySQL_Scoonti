@@ -12,7 +12,7 @@ export default function Home() {
         stations.length === 0 ? <SpinnerLoading />
         :<div className="home_container">
             <div className="title">
-                <h1>Welcome to Scoonti</h1>
+                <h1>Stations Map</h1>
             </div>
             <div className='maps'>
                 <StationsMap stations={stations} setShow={setShow}/>

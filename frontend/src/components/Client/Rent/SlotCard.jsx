@@ -47,14 +47,14 @@ export default function SlotCard ({ slot }) {
                 <div className="card_image">
                     <img src="/assets/scooter.png" style={{ backgroundColor: `${img_background}` }}/> 
                 </div>
-                <div className="card_title title-black">
+                <div className="card_title">
                     <p>Slot: {slot.slot_number}</p>
                     <p>{slot_status}</p>
                 </div>
             </div>
             <div className="report">
                 <p className="report_button" onClick={() => report(slot.id)}>
-                    <FontAwesomeIcon className='icon' icon="fa-solid fa-circle-exclamation" />
+                    <FontAwesomeIcon className='icon' icon="fa-solid fa-circle-exclamation"/>
                     Report an incidence
                 </p>
             </div>

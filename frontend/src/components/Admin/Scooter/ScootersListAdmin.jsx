@@ -1,5 +1,5 @@
 import React from 'react';
-import './ScootersListAdmin.scss';
+// import './ScootersListAdmin.scss';
 import { useNavigate } from "react-router-dom";
 
 import ScootersCardAdmin from './ScootersCardAdmin';

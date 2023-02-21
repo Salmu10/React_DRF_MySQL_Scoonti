@@ -10,12 +10,15 @@ export default function StationCard ({ station }) {
     }
 
     return (
-        <div className="card 1" onClick={() => redirects.details(station.slug)}>
-            <div className="card_image">
-                <img src="/assets/estacion.jpeg"/> 
-            </div>
-            <div className="card_title title-white">
+        <div>
+            <div className="card_title">
                 <p>{station.name}</p>
+            </div>
+            <div className="card 1" onClick={() => redirects.details(station.slug)}>
+                <div className="card_image">
+                    <img src="/assets/estacion.jpeg"/> 
+                </div>
+
             </div>
         </div>
     )

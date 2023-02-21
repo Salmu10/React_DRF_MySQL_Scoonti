@@ -6,7 +6,7 @@ export default function Footer() {
         <footer>
             <div className="footer">
                 <div className="page_logo_box">
-                <img src="/assets/Logo.png" alt="logo"/>
+                    <img src="/assets/Logo.png" alt="logo"/>
                 </div>
                 <div className="text_box">
                     <p>Scoonti project by Salva Muñoz</p>

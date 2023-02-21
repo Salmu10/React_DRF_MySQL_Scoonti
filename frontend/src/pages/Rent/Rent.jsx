@@ -10,8 +10,12 @@ export default function Rent() {
     return (
         stations.length === 0 ? <SpinnerLoading />
         :<div className="rent_container">
-            <h1>Stations</h1>
-            <StationsList stations={stations}/>
+            <div className="title">
+                <h1>Stations</h1>
+            </div>
+            <div className='stations-list-container'>
+                <StationsList stations={stations}/>
+            </div>
         </div>
     )
 }

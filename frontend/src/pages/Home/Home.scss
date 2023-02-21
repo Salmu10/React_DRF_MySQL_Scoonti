@@ -1,6 +1,6 @@
 .home_container {
-    min-height: 77vh;
     padding: 20px;
+    width: 100%;
     .title {
         text-align: center;
         padding: 20px;
@@ -12,7 +12,6 @@
     }
     .maps {
         display: block;
-        width: 70%;
         margin: auto;
         border: 2px solid #008f88;
         border-radius: 15px;
@@ -20,4 +19,52 @@
             border-radius: 15px;
         }
     }
+}
+
+@media screen and (max-width: 576px) {
+
+    .home_container {
+        min-height: 83vh;
+        .title {
+            h1 {
+                font-size: 25px;
+            }
+        }
+        .maps {
+            width: 90%;
+        }
+    }
+
+}
+
+@media screen and (min-width: 577px) {
+
+    .home_container {
+        min-height: 81vh;
+        .title {
+            h1 {
+                font-size: 30px;
+            }
+        }
+        .maps {
+            width: 80%;
+        }
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+
+    .home_container {
+        min-height: 81vh;
+        .title {
+            h1 {
+                font-size: 35px;
+            }
+        }
+        .maps {
+            width: 70%;
+        }
+    }
+
 }

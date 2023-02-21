@@ -94,7 +94,7 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
                         </div>
                         <div className='attribute_box'>
                             <label htmlFor="stats" className='etiqueta'>Total times rented:</label>
-                            <input type="text" id="stats" {...register('stats')} disabled={true}/><br/>
+                            <input type="text" className='stats' id="stats" {...register('stats')} disabled={true}/><br/>
                         </div>
                         <div className="error_server">{errorMSG}</div>
                     </div>
@@ -106,13 +106,14 @@ const ProfileForm = ({user, profile, sendData, errorMSG}) => {
                         </div>
                     </div>
                     <div className='buttons_box'>
-                        <button type="submit" className="confirm btn btn-success" hidden={edit}>Confirm</button>
-                        <button type="button" className="edit btn btn-primary" onClick={() => setEdit(false)}>Edit profile</button>
                         <button type="button" className="cancel btn btn-danger" onClick={() => setEdit(true)} hidden={edit}>Cancel</button>
+                        <button type="button" className="edit btn btn-primary" onClick={() => setEdit(false)}>Edit profile</button>
+                        <button type="submit" className="confirm btn btn-success" hidden={edit}>Confirm</button>
                     </div>
                 </div>
             </form>
-
+            
+            <h3>Notifications</h3>
             {notifications_html}
 
             <div className='user_scooter'>

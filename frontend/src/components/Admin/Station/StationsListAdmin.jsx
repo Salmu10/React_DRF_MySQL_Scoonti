@@ -1,5 +1,5 @@
 import React from 'react';
-import './StationsListAdmin.scss';
+// import './StationsListAdmin.scss';
 import { useNavigate } from "react-router-dom";
 
 import StationsCardAdmin from './StationsCardAdmin';

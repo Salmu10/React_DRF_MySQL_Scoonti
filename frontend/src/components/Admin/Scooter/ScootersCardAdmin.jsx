@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import './ScootersCardAdmin.scss';
+// import './ScootersCardAdmin.scss';
 
 export default function ScootersCardAdmin ({ scooter, index, deleteScooter }) {
 

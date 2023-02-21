@@ -1,5 +1,5 @@
 import React from "react";
-import './Dashboard.scss';
+// import './Dashboard.scss';
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {

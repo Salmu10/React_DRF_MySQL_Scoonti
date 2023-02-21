@@ -1,5 +1,5 @@
 import React from 'react';
-import './RentsListAdmin.scss';
+// import './RentsListAdmin.scss';
 import { useNavigate } from "react-router-dom";
 
 import RentsCardAdmin from './RentsCardAdmin';

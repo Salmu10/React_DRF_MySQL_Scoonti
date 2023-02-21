@@ -1,5 +1,5 @@
 import React from 'react';
-import './IncidentsListAdmin.scss';
+// import './IncidentsListAdmin.scss';
 import { useNavigate } from "react-router-dom";
 
 import IncidentsCardAdmin from './IncidentsCardAdmin';

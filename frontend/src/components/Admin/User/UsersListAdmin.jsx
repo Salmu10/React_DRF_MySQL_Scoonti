@@ -1,5 +1,5 @@
 import React from 'react';
-import './UsersListAdmin.scss';
+// import './UsersListAdmin.scss';
 import { useNavigate } from "react-router-dom";
 
 import UsersCardAdmin from './UsersCardAdmin';
