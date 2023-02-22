@@ -1,11 +1,10 @@
 .scooter_add_container, .scooter_update_container {
-    min-height: 77vh;
+    padding: 20px;
+    width: 100%;
     .title {
-        text-align: left;
+        text-align: center;
         padding: 20px;
-        h2 {
-            margin-left: 5%;
-            margin-top: 3%;
+        h1 {
             text-transform: uppercase;
             font-weight: bold;
             color: #333;
@@ -19,35 +18,27 @@
         display: flex;
         flex-direction: column;
         justify-content: left;
-        width: 50%;
-        padding: 20px;
-        margin-left: 5%;
-        div{
+        div {
             display: block;
             width: 60%;
             text-align: left;
-            padding: 15px;
             .etiqueta {
-                display: block;
-                float: left;
+                display: inline-block;
+                width: 150px;
                 text-transform: uppercase;
                 font-weight: bold;
+                padding-bottom: 10px;
             }
             input {
-                display: block;
-                margin-left: 20px;
-                float: right;
                 border: 1px solid #008f88;
                 padding: 5px;
                 &:disabled {
-                    background-color: #575757;
+                    background-color: #dbd4d4;
                 }
             }
             select {
-                display: block;
-                margin-left: 20px;
-                width: 190px;
-                float: right;
+                width: 195px;
+                padding: 5px;
             }
             span {
                 padding-top: 10px;
@@ -56,9 +47,8 @@
         .buttons_box {
             display: flex;
             flex-direction: row;
-            justify-content: center;
+            justify-content: left;
             margin-top: 20px;
-            padding: 20px;
             button {
                 text-transform: uppercase;
                 font-weight: bold;
@@ -67,4 +57,82 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 576px) {
+
+    .scooter_add_container, .scooter_update_container {
+        min-height: 83vh;
+        .title {
+            h1 {
+                font-size: 25px;
+            }
+        }
+        .scooter_form {
+            padding: 10px;
+            div {
+                padding: 10px;
+            }
+            .buttons_box {
+                padding: 10px;
+                button {
+                    margin-right: 5px;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 577px) {
+
+    .scooter_add_container, .scooter_update_container {
+        min-height: 85vh;
+        .title {
+            h1 {
+                font-size: 30px;
+            }
+        }
+        .scooter_form {
+            padding: 20px;
+            div {
+                padding: 20px;
+            }
+            .buttons_box {
+                padding: 20px;
+                button {
+                    margin-right: 15px;
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+
+    .scooter_add_container, .scooter_update_container {
+        min-height: 81vh;
+        .title {
+            h1 {
+                font-size: 35px;
+            }
+        }
+        .scooter_form {
+            padding: 30px;
+            div {
+                padding: 30px;
+            }
+            .buttons_box {
+                padding: 30px;
+                button {
+                    margin-right: 20px;
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+
 }

@@ -17,7 +17,7 @@ const ScootersAdd = () => {
     return (
         <div className="scooter_add_container">
             <div className="title">
-                <h2>Create Scooter</h2>
+                <h1>Create Scooter</h1>
             </div>
             <ScootersForm form_type={form_type} sendData={(data) => useAddScooter(data)}/>
         </div>

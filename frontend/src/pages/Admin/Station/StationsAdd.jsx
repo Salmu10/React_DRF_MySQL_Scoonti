@@ -17,7 +17,7 @@ const StationsAdd = () => {
     return (
         <div className="station_add_container">
             <div className="title">
-                <h2>Create Station</h2>
+                <h1>Create Station</h1>
             </div>
             <StationsForm form_type={form_type} sendData={(data) => useAddStation(data)}/>
         </div>

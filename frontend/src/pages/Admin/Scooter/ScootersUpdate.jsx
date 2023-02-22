@@ -22,7 +22,7 @@ const ScootersUpdate = () => {
     return (
         <div className="scooter_update_container">
             <div className="title">
-                <h2>Update Scooter</h2>
+                <h1>Update Scooter</h1>
             </div>
             <ScootersForm scooter={oneScooter} form_type={form_type} sendData={(data) => useUpdateScooter(slug, data)}/>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-// import './RentsCardAdmin.scss';
+import './RentsCardAdmin.scss';
 
 export default function RentsCardAdmin ({ rent, index, deleteRent }) {
 

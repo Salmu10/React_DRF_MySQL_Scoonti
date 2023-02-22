@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import './IncidentsCardAdmin.scss';
+import './IncidentsCardAdmin.scss';
 import { Popover } from '@headlessui/react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';

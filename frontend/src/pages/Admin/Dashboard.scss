@@ -1,12 +1,14 @@
 .dashboard_container {
     padding: 20px;
-    min-height: 77vh;
-    h1 {
+    width: 100%;
+    .title {
         text-align: center;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 35px;
-        color: #333;
+        padding: 20px;
+        h1 {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: #333;
+        }
     }
     .buttons_box {
         display: flex;
@@ -16,7 +18,6 @@
             display: block;
             margin: auto;
             text-align: center;
-            margin-top: 2%;
             width: 200px;
             padding: 15px;
             text-transform: uppercase;
@@ -31,4 +32,58 @@
             }
         }
     }
+}
+
+@media screen and (max-width: 576px) {
+
+    .dashboard_container {
+        min-height: 83vh;
+        .title {
+            h1 {
+                font-size: 25px;
+            }
+        }
+        .buttons_box {
+            .button {
+                margin-top: 5%;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 577px) {
+
+    .dashboard_container {
+        min-height: 85vh;
+        .title {
+            h1 {
+                font-size: 30px;
+            }
+        }
+        .buttons_box {
+            .button {
+                margin-top: 5%;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: 992px) {
+
+    .dashboard_container {
+        min-height: 79vh;
+        .title {
+            h1 {
+                font-size: 35px;
+            }
+        }
+        .buttons_box {
+            .button {
+                margin-top: 2%;
+            }
+        }
+    }
+
 }

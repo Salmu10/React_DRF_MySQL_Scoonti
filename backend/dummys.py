@@ -40,6 +40,6 @@ def create_stations(n, n_slot):
 
 if __name__ == '__main__':
     print('Dummys start')
-    create_scooter(50)
-    create_stations(5, 10)
+    create_scooter(40)
+    create_stations(5, 8)
     print('Dummys end')

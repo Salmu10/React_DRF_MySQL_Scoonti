@@ -22,7 +22,7 @@ const StationsUpdate = () => {
     return (
         <div className="station_update_container">
             <div className="title">
-                <h2>Update Station</h2>
+                <h1>Update Station</h1>
             </div>
             <StationsForm station={oneStation} form_type={form_type} sendData={(data) => useUpdateStation(slug, data)}/>
         </div>

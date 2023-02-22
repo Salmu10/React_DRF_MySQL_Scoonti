@@ -1,21 +1,12 @@
 import React from 'react';
-// import './RentsListAdmin.scss';
-import { useNavigate } from "react-router-dom";
-
+import './RentsListAdmin.scss';
 import RentsCardAdmin from './RentsCardAdmin';
 
 export default function RentsListAdmin ({ rents, deleteRent }) {
 
-    const navigate = useNavigate();
-
-    // const redirects = {
-    //     add_user: () => navigate('/home'),
-    // }
-
     return  (
         <div className="rents_list_container">
             <h1>Rents List</h1>
-            {/* <button className="button add_button" onClick={() => redirects.add_scooter()}>Add scooter</button> */}
             <table className="table" border="1">
                 <thead className="thead_rents_list">
                     <tr>

@@ -1,5 +1,5 @@
 import React from "react";
-// import './Dashboard.scss';
+import './Dashboard.scss';
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
@@ -16,7 +16,9 @@ const Dashboard = () => {
     
     return (
         <div className="dashboard_container">
-            <h1>Dashboard</h1>
+            <div className="title">
+                <h1>Dashboard</h1>
+            </div>
             <div className="buttons_box">
                 <button className="button" onClick={() => redirects.stations()}><span>Stations List</span></button>
                 <button className="button" onClick={() => redirects.scooters()}><span>Scooter List</span></button>

@@ -1,5 +1,5 @@
 import React from 'react';
-// import './UsersCardAdmin.scss';
+import './UsersCardAdmin.scss';
 
 export default function UsersCardAdmin ({ user, index, deleteUser }) {
 
