@@ -22,7 +22,7 @@ const Dashboard = () => {
             <div className="buttons_box">
                 <button className="button" onClick={() => redirects.stations()}><span>Stations List</span></button>
                 <button className="button" onClick={() => redirects.scooters()}><span>Scooter List</span></button>
-                <button className="button" onClick={() => redirects.slots()}><span>Slots List</span></button>
+                {/* <button className="button" onClick={() => redirects.slots()}><span>Slots List</span></button> */}
                 <button className="button" onClick={() => redirects.users()}><span>Users List</span></button>
                 <button className="button" onClick={() => redirects.rents()}><span>Rents List</span></button>
                 <button className="button" onClick={() => redirects.icidents()}><span>Incidents List</span></button>
